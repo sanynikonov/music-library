@@ -56,6 +56,16 @@ namespace MusicLibrary.Business
             return song.Id;
         }
 
+        public async Task AddToPlaylistAsync(int songId, int playlistId)
+        {
+            var playlist = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(playlistId);
+            var song = await _unit.SongsRepository.GetAsync(songId);
+            playlist.Songs.Add(song);
+
+            await _unit.SongsCollectionsRepository.UpdateAsync(playlist);
+            await _unit.SaveChangesAsync();
+        }
+
         public async Task LikeAsync(int songId, int userId)
         {
             var like = (await _unit.LikesRepository.GetAsync(x => x.SongId == songId && x.UserId == userId)).FirstOrDefault();
