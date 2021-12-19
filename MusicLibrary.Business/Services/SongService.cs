@@ -39,5 +39,32 @@ namespace MusicLibrary.Business
             }
             return models;
         }
+
+        public async Task<int> AddAsync(SongModel model)
+        {
+            var song = new Song
+            {
+                Name = model.Name,
+                AlbumId = model.AlbumId,
+                AudioPath = model.AudioPath,
+                Author = model.Authors.Select(a => new Author { Name = a.Name }).ToArray()
+            };
+
+            await _unit.SongsRepository.AddAsync(song);
+            await _unit.SaveChangesAsync();
+
+            return song.Id;
+        }
+
+        public async Task LikeAsync(int songId, int userId)
+        {
+            var like = (await _unit.LikesRepository.GetAsync(x => x.SongId == songId && x.UserId == userId)).FirstOrDefault();
+            if (like == null)
+                await _unit.LikesRepository.AddAsync(new Like { SongId = songId, UserId = userId });
+            else
+                await _unit.LikesRepository.DeleteAsync(like);
+
+            await _unit.SaveChangesAsync();
+        }
     }
 }
