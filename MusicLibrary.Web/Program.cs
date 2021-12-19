@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using MusicLibrary.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services
-    .AddDbContext<MusicLibraryContext>()
-    .AddSqlServer<MusicLibraryContext>(builder.Configuration.GetConnectionString("MusicLibrary"));
+    .AddDbContext<MusicLibraryContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("MusicLibrary")));
 
 var app = builder.Build();
 

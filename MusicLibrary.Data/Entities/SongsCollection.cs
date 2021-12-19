@@ -12,6 +12,7 @@
         public SongsCollectionType SongsCollectionType { get; set; }
         public ICollection<Author> Authors { get; set; } = new List<Author>();
         public ICollection<Song> Songs { get; set; } = new List<Song>();
+        public ICollection<Song> PlaylistSongs { get; set; } = new List<Song>();
         public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

@@ -39,7 +39,7 @@ namespace MusicLibrary.Data
 
             builder.Entity<Song>()
                 .HasMany(p => p.Playlists)
-                .WithMany(p => p.Songs);
+                .WithMany(p => p.PlaylistSongs);
 
             builder.Entity<Song>()
                 .HasMany(p => p.Likes)
