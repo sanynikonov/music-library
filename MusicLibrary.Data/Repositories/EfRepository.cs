@@ -43,6 +43,13 @@ namespace MusicLibrary.Data
 
         public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate = null, int? pageNumber = null, int? pageSize = null)
         {
+            IQueryable<T> query = CreateQuery(predicate, pageNumber, pageSize);
+
+            return await query.ToListAsync();
+        }
+
+        protected IQueryable<T> CreateQuery(Expression<Func<T, bool>> predicate, int? pageNumber, int? pageSize)
+        {
             IQueryable<T> query = _dbContext.Set<T>();
 
             if (predicate != null)
@@ -55,7 +62,7 @@ namespace MusicLibrary.Data
                 query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
             }
 
-            return await query.ToListAsync();
+            return query;
         }
 
         public async Task<int> CountAsync(Expression<Func<T, bool>> predicate = null)

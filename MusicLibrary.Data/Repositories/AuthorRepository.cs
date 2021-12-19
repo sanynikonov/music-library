@@ -13,12 +13,12 @@ namespace MusicLibrary.Data
         {
         }
 
-        public async Task<Author> GetAuthorWithAlbumsAsync()
+        public async Task<Author> GetAuthorWithAlbumsAsync(int id)
         {
             return await _dbContext.Authors
                 .Include(p => p.Albums)
                 .ThenInclude(p => p.SongsCollectionType)
-                .FirstOrDefaultAsync();
+                .SingleOrDefaultAsync(a => a.Id == id);
         }
     }
 }

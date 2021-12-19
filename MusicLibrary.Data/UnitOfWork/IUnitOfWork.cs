@@ -10,7 +10,7 @@ namespace MusicLibrary.Data
     public interface IUnitOfWork
     {
         public ISongRepository SongsRepository { get; }
-        public IRepository<SongsCollection> SongsCollectionsRepository { get; }
+        public ISongsCollectionRepository SongsCollectionsRepository { get; }
         public IRepository<SongsCollectionType> SongsCollectionTypesRepository { get; }
         public IRepository<Like> LikesRepository { get; }
         public IAuthorRepository AuthorsRepository { get; }

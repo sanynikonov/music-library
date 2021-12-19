@@ -29,7 +29,7 @@ namespace MusicLibrary.Business
 
         public async Task<AuthorModel> GetAuthorAsync(int id)
         {
-            var author = await _unit.AuthorsRepository.GetAuthorWithAlbumsAsync();
+            var author = await _unit.AuthorsRepository.GetAuthorWithAlbumsAsync(id);
             return new AuthorModel
             {
                 Id = author.Id,

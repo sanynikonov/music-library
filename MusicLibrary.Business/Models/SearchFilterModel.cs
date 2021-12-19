@@ -12,4 +12,9 @@ namespace MusicLibrary.Business
         public int PageSize { get; set; } = 20;
         public int PageNumber { get; set; } = 1;
     }
+
+    public class SongsCollectionSearchFilterModel : SearchFilterModel
+    {
+        public string SongsCollectionType { get; set; }
+    }
 }

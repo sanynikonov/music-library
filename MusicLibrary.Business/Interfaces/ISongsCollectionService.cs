@@ -8,7 +8,7 @@ namespace MusicLibrary.Business
 {
     internal interface ISongsCollectionService
     {
-        Task<IEnumerable<SongsCollectionListItemModel>> GetAllSongsCollectionsAsync(SearchFilterModel filter);
+        Task<IEnumerable<SongsCollectionListItemModel>> GetAllSongsCollectionsAsync(SongsCollectionSearchFilterModel filter);
         Task<SongsCollectionModel> GetSongsCollectionAsync(int id);
     }
 }
