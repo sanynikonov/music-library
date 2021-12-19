@@ -10,7 +10,7 @@ namespace MusicLibrary.Data
 {
     public class EfRepository<T> : IRepository<T> where T : class, IBaseEntity
     {
-        private readonly MusicLibraryContext _dbContext;
+        protected readonly MusicLibraryContext _dbContext;
 
         public EfRepository(MusicLibraryContext dbContext)
         {

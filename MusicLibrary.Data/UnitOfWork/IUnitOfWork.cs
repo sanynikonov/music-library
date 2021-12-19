@@ -13,7 +13,7 @@ namespace MusicLibrary.Data
         public IRepository<SongsCollection> SongsCollectionsRepository { get; }
         public IRepository<SongsCollectionType> SongsCollectionTypesRepository { get; }
         public IRepository<Like> LikesRepository { get; }
-        public IRepository<Author> AuthorsRepository { get; }
+        public IAuthorRepository AuthorsRepository { get; }
         public SignInManager<User> SignInManager { get; }
         public UserManager<User> UserManager { get; }
         public RoleManager<Role> RoleManager { get; }

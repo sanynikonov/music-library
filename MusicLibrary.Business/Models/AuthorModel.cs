@@ -11,6 +11,6 @@ namespace MusicLibrary.Business
         public int Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<SongsCollectionListItemModel> Albums { get; set; } = Enumerable.Empty<SongsCollectionListItemModel>();
-        public IEnumerable<SongModel> TopSongs { get; set; } = Enumerable.Empty<SongModel>();
+        //TODO: display best songs
     }
 }

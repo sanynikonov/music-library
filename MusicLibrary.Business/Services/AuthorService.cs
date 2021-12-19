@@ -29,21 +29,18 @@ namespace MusicLibrary.Business
 
         public async Task<AuthorModel> GetAuthorAsync(int id)
         {
-            var author = await _unit.AuthorsRepository.GetAsync(id);
-            //TODO: use separate repository method
-            var albums = await _unit.SongsCollectionsRepository.GetAsync(a => a.Authors.Select(ath => ath.Id).Contains(id));
-            var type = await _unit.SongsCollectionTypesRepository.GetAsync(s => s.Id == author.Id);
+            var author = await _unit.AuthorsRepository.GetAuthorWithAlbumsAsync();
             return new AuthorModel
             {
                 Id = author.Id,
                 Name = author.Name,
-                Albums = albums.Select(a => new SongsCollectionListItemModel
+                Albums = author.Albums.Select(a => new SongsCollectionListItemModel
                 {
                     Id = a.Id,
                     Name = a.Name,
-                    SongsCollectionType = type.First().Name,
-                    Year = a.Year
-                })
+                    Year = a.Year,
+                    SongsCollectionType = a.SongsCollectionType.Name
+                }).ToArray()
             };
         }
     }
