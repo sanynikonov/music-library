@@ -14,15 +14,14 @@ namespace MusicLibrary.Data
         {
         }
 
-        public async Task<IEnumerable<SongsCollection>> GetAllWithAuthorsAsync(Expression<Func<SongsCollection, bool>> predicate = null, int? pageNumber = null, int? pageSize = null)
+        public async Task<IEnumerable<SongsCollection>> GetAllWithTypesAsync(Expression<Func<SongsCollection, bool>> predicate = null, int? pageNumber = null, int? pageSize = null)
         {
             return await CreateQuery(predicate, pageNumber, pageSize)
-                .Include(c => c.Authors)
                 .Include(c => c.SongsCollectionType)
                 .ToArrayAsync();
         }
 
-        public async Task<SongsCollection> GetWithAuthorsAndSongsAsync(int id)
+        public async Task<SongsCollection> GetWithAuthorsAndSongsAndTypesAsync(int id)
         {
             return await _dbContext.SongsCollections
                 .Include(c => c.Authors)

@@ -12,10 +12,5 @@ namespace MusicLibrary.Business
         public int Year { get; set; }
         public string Name { get; set; }
         public string SongsCollectionType { get; set; }
-
-        internal SongsCollectionListItemModel ToArray()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

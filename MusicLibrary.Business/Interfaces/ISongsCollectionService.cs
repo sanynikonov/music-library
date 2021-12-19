@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.Business
 {
-    internal interface ISongsCollectionService
+    public interface ISongsCollectionService
     {
         Task<IEnumerable<SongsCollectionListItemModel>> GetAllSongsCollectionsAsync(SongsCollectionSearchFilterModel filter);
         Task<SongsCollectionModel> GetSongsCollectionAsync(int id);
