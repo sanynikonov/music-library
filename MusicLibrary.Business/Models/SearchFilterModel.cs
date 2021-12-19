@@ -9,5 +9,7 @@ namespace MusicLibrary.Business
     public class SearchFilterModel
     {
         public string SearchString { get; set; }
+        public int PageSize { get; set; } = 20;
+        public int PageNumber { get; set; } = 1;
     }
 }
