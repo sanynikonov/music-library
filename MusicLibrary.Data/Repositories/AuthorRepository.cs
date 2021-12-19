@@ -15,7 +15,7 @@ namespace MusicLibrary.Data
 
         public async Task<Author> GetAuthorWithAlbumsAsync()
         {
-            var author = await _dbContext.Authors
+            return await _dbContext.Authors
                 .Include(p => p.Albums)
                 .ThenInclude(p => p.SongsCollectionType)
                 .FirstOrDefaultAsync();
