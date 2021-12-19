@@ -14,7 +14,7 @@ namespace MusicLibrary.Data
         public int AlbumId { get; set; }
 
         public SongsCollection Album { get; set; }
-        public ICollection<Author> Author { get; set; } = new List<Author>();
+        public ICollection<Author> Authors { get; set; } = new List<Author>();
         public ICollection<SongsCollection> Playlists { get; set; } = new List<SongsCollection>();
         public ICollection<Like> Likes { get; set; } = new List<Like>();
     }

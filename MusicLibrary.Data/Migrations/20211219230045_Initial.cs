@@ -286,15 +286,15 @@ namespace MusicLibrary.Data.Migrations
                 name: "AuthorSong",
                 columns: table => new
                 {
-                    AuthorId = table.Column<int>(type: "int", nullable: false),
+                    AuthorsId = table.Column<int>(type: "int", nullable: false),
                     SongsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AuthorSong", x => new { x.AuthorId, x.SongsId });
+                    table.PrimaryKey("PK_AuthorSong", x => new { x.AuthorsId, x.SongsId });
                     table.ForeignKey(
-                        name: "FK_AuthorSong_Authors_AuthorId",
-                        column: x => x.AuthorId,
+                        name: "FK_AuthorSong_Authors_AuthorsId",
+                        column: x => x.AuthorsId,
                         principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);

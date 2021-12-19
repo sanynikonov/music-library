@@ -57,7 +57,7 @@ namespace MusicLibrary.Business
                     Id = song.Id,
                     AlbumId = song.AlbumId,
                     AudioPath = song.AudioPath,
-                    Authors = song.Author.Select(a => new AuthorListItemModel
+                    Authors = song.Authors.Select(a => new AuthorListItemModel
                     {
                         Id = a.Id,
                         Name = a.Name

@@ -29,7 +29,7 @@ namespace MusicLibrary.Business
                     Id = song.Id,
                     AlbumId = song.AlbumId,
                     AudioPath = song.AudioPath,
-                    Authors = song.Author.Select(a => new AuthorListItemModel
+                    Authors = song.Authors.Select(a => new AuthorListItemModel
                     {
                         Id = a.Id,
                         Name = a.Name
@@ -47,7 +47,7 @@ namespace MusicLibrary.Business
                 Name = model.Name,
                 AlbumId = model.AlbumId,
                 AudioPath = model.AudioPath,
-                Author = model.Authors.Select(a => new Author { Name = a.Name }).ToArray()
+                Authors = model.Authors.Select(a => new Author { Name = a.Name }).ToArray()
             };
 
             await _unit.SongsRepository.AddAsync(song);

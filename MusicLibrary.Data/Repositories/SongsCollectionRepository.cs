@@ -27,7 +27,7 @@ namespace MusicLibrary.Data
                 .Include(c => c.Authors)
                 .Include(c => c.SongsCollectionType)
                 .Include(c => c.Songs)
-                .ThenInclude(s => s.Author)
+                .ThenInclude(s => s.Authors)
                 .SingleOrDefaultAsync(c => c.Id == id);
         }
     }

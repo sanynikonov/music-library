@@ -12,7 +12,7 @@ using MusicLibrary.Data;
 namespace MusicLibrary.Data.Migrations
 {
     [DbContext(typeof(MusicLibraryContext))]
-    [Migration("20211219161409_Initial")]
+    [Migration("20211219230045_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,13 +26,13 @@ namespace MusicLibrary.Data.Migrations
 
             modelBuilder.Entity("AuthorSong", b =>
                 {
-                    b.Property<int>("AuthorId")
+                    b.Property<int>("AuthorsId")
                         .HasColumnType("int");
 
                     b.Property<int>("SongsId")
                         .HasColumnType("int");
 
-                    b.HasKey("AuthorId", "SongsId");
+                    b.HasKey("AuthorsId", "SongsId");
 
                     b.HasIndex("SongsId");
 
@@ -414,7 +414,7 @@ namespace MusicLibrary.Data.Migrations
                 {
                     b.HasOne("MusicLibrary.Data.Author", null)
                         .WithMany()
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("AuthorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -29,7 +29,7 @@ namespace MusicLibrary.Data
             }
 
             return await query
-                .Include(p => p.Author)
+                .Include(p => p.Authors)
                 .ToArrayAsync();
         }
     }
