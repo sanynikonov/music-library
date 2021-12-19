@@ -14,7 +14,7 @@ namespace MusicLibrary.Data
         private IServiceProvider _serviceProvider;
 
         private IRepository<Like> _likesRepository;
-        private IRepository<Song> _songsRepository;
+        private ISongRepository _songsRepository;
         private IRepository<SongsCollection> _songsCollectionsRepository;
         private IRepository<SongsCollectionType> _songsCollectionTypesRepository;
         private IAuthorRepository _authorsRepository;
@@ -22,7 +22,7 @@ namespace MusicLibrary.Data
         private UserManager<User> _userManager;
         private RoleManager<Role> _roleManager;
 
-        public IRepository<Song> SongsRepository => _songsRepository ??= new EfRepository<Song>(_context);
+        public ISongRepository SongsRepository => _songsRepository ??= new SongRepository(_context);
 
         public IRepository<SongsCollection> SongsCollectionsRepository => _songsCollectionsRepository ??= new EfRepository<SongsCollection>(_context);
 
