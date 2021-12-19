@@ -494,7 +494,7 @@ namespace MusicLibrary.Data.Migrations
                     b.HasOne("MusicLibrary.Data.Song", "Song")
                         .WithMany("Likes")
                         .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MusicLibrary.Data.User", "User")
@@ -543,7 +543,7 @@ namespace MusicLibrary.Data.Migrations
                     b.HasOne("MusicLibrary.Data.SongsCollection", null)
                         .WithMany()
                         .HasForeignKey("SavedPlaylistsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MusicLibrary.Data.User", null)
@@ -558,7 +558,7 @@ namespace MusicLibrary.Data.Migrations
                     b.HasOne("MusicLibrary.Data.Song", null)
                         .WithMany()
                         .HasForeignKey("PlaylistSongsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MusicLibrary.Data.SongsCollection", null)

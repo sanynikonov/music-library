@@ -278,8 +278,7 @@ namespace MusicLibrary.Data.Migrations
                         name: "FK_SongsCollectionUser_SongsCollections_SavedPlaylistsId",
                         column: x => x.SavedPlaylistsId,
                         principalTable: "SongsCollections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -328,8 +327,7 @@ namespace MusicLibrary.Data.Migrations
                         name: "FK_Likes_Songs_SongId",
                         column: x => x.SongId,
                         principalTable: "Songs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -346,8 +344,7 @@ namespace MusicLibrary.Data.Migrations
                         name: "FK_SongSongsCollection_Songs_PlaylistSongsId",
                         column: x => x.PlaylistSongsId,
                         principalTable: "Songs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_SongSongsCollection_SongsCollections_PlaylistsId",
                         column: x => x.PlaylistsId,

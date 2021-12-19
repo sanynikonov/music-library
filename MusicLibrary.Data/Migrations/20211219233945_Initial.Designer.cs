@@ -12,7 +12,7 @@ using MusicLibrary.Data;
 namespace MusicLibrary.Data.Migrations
 {
     [DbContext(typeof(MusicLibraryContext))]
-    [Migration("20211219230045_Initial")]
+    [Migration("20211219233945_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -496,7 +496,7 @@ namespace MusicLibrary.Data.Migrations
                     b.HasOne("MusicLibrary.Data.Song", "Song")
                         .WithMany("Likes")
                         .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MusicLibrary.Data.User", "User")
@@ -545,7 +545,7 @@ namespace MusicLibrary.Data.Migrations
                     b.HasOne("MusicLibrary.Data.SongsCollection", null)
                         .WithMany()
                         .HasForeignKey("SavedPlaylistsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MusicLibrary.Data.User", null)
@@ -560,7 +560,7 @@ namespace MusicLibrary.Data.Migrations
                     b.HasOne("MusicLibrary.Data.Song", null)
                         .WithMany()
                         .HasForeignKey("PlaylistSongsId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MusicLibrary.Data.SongsCollection", null)

@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services
     .AddDbContext<MusicLibraryContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("MusicLibrary")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("MusicLibrary")))
+    .AddIdentity<User, Role>()
+    .AddEntityFrameworkStores<MusicLibraryContext>();
 
 var app = builder.Build();
 

@@ -18,7 +18,7 @@ namespace MusicLibrary.Data
 
         public MusicLibraryContext(DbContextOptions<MusicLibraryContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -39,11 +39,16 @@ namespace MusicLibrary.Data
 
             builder.Entity<Song>()
                 .HasMany(p => p.Playlists)
-                .WithMany(p => p.PlaylistSongs);
+                .WithMany(p => p.PlaylistSongs)
+                .UsingEntity<Dictionary<string, object>>(
+                    "SongSongsCollection",
+                    j => j.HasOne<SongsCollection>().WithMany().OnDelete(DeleteBehavior.Cascade),
+                    j => j.HasOne<Song>().WithMany().OnDelete(DeleteBehavior.ClientCascade));
 
             builder.Entity<Song>()
                 .HasMany(p => p.Likes)
-                .WithOne(p => p.Song);
+                .WithOne(p => p.Song)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<User>()
                 .HasMany(p => p.LikedSongs)
@@ -51,7 +56,11 @@ namespace MusicLibrary.Data
 
             builder.Entity<SongsCollection>()
                 .HasMany(p => p.Users)
-                .WithMany(p => p.SavedPlaylists);
+                .WithMany(p => p.SavedPlaylists)
+                .UsingEntity<Dictionary<string, object>>(
+                    "SongsCollectionUser",
+                    j => j.HasOne<User>().WithMany().OnDelete(DeleteBehavior.Cascade),
+                    j => j.HasOne<SongsCollection>().WithMany().OnDelete(DeleteBehavior.ClientCascade));
 
             builder.Entity<SongsCollection>()
                 .HasOne(p => p.UserAuthor)
