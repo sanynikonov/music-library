@@ -4,7 +4,7 @@ using MusicLibrary.Business;
 
 namespace MusicLibrary.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/collections")]
     [ApiController]
     public class CollectionsController : ControllerBase
     {
@@ -23,8 +23,8 @@ namespace MusicLibrary.Web.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<SongsCollectionModel>> GetById([FromRoute]int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SongsCollectionModel>> GetById([FromRoute] int id)
         {
             var result = await _service.GetSongsCollectionAsync(id);
             return Ok(result);
@@ -38,7 +38,7 @@ namespace MusicLibrary.Web.Controllers
         }
 
         [HttpPut("likes")]
-        public async Task<ActionResult> PutLike([FromQuery]int collectionId, [FromQuery]int userId)
+        public async Task<ActionResult> PutLike([FromQuery] int collectionId, [FromQuery] int userId)
         {
             await _service.LikeAsync(collectionId, userId);
             return Ok();

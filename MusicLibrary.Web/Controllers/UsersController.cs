@@ -4,7 +4,7 @@ using MusicLibrary.Business;
 
 namespace MusicLibrary.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {

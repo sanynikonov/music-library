@@ -4,7 +4,7 @@ using MusicLibrary.Business;
 
 namespace MusicLibrary.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/songs")]
     [ApiController]
     public class SongsController : ControllerBase
     {
@@ -29,10 +29,10 @@ namespace MusicLibrary.Web.Controllers
             return Ok(id);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<int>> PutToPlaylist([FromQuery] int songId, [FromQuery] int userId)
+        [HttpPut("~/api/collections/{playlistId}/songs/{songId}")]
+        public async Task<ActionResult> PutToPlaylist([FromRoute] int songId, [FromQuery] int playlistId)
         {
-            await _service.LikeAsync(songId, userId);
+            await _service.AddToPlaylistAsync(songId, playlistId);
             return Ok();
         }
 

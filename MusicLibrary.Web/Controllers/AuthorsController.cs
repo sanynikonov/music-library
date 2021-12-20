@@ -4,7 +4,7 @@ using MusicLibrary.Business;
 
 namespace MusicLibrary.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/authors")]
     [ApiController]
     public class AuthorsController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace MusicLibrary.Web.Controllers
             return Ok(authors);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<AuthorModel>> GetById([FromRoute] int id)
         {
             var author = await _service.GetAuthorAsync(id);
