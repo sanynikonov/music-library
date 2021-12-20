@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MusicLibrary.Data;
+using MusicLibrary.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,5 +43,7 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html"); ;
+
+await app.SeedData();
 
 app.Run();
