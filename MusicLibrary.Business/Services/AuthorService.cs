@@ -16,7 +16,7 @@ namespace MusicLibrary.Business
             _unit = unit;
         }
 
-        public async Task<IEnumerable<AuthorListItemModel>> GetAllAuthorAsync(SearchFilterModel filter)
+        public async Task<IEnumerable<AuthorListItemModel>> GetAllAuthorsAsync(SearchFilterModel filter)
         {
             var authors = await _unit.AuthorsRepository.GetAsync(a => a.Name.Contains(filter.SearchString), filter.PageNumber, filter.PageSize);
             var models = authors.Select(a => new AuthorListItemModel

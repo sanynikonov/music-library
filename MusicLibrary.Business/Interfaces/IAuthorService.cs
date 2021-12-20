@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.Business
 {
-    internal interface IAuthorService
+    public interface IAuthorService
     {
         Task<AuthorModel> GetAuthorAsync(int id);
-        Task<IEnumerable<AuthorListItemModel>> GetAllAuthorAsync(SearchFilterModel filter);
+        Task<IEnumerable<AuthorListItemModel>> GetAllAuthorsAsync(SearchFilterModel filter);
     }
 }
