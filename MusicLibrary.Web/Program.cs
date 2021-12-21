@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MusicLibrary.Business;
 using MusicLibrary.Data;
 using MusicLibrary.Web;
 
@@ -13,6 +14,17 @@ builder.Services
     .AddIdentity<User, Role>()
     .AddEntityFrameworkStores<MusicLibraryContext>();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(config => config.AddProfile<MapperProfile>());
+builder.Services
+    .AddScoped<IUserService, UserService>()
+    .AddScoped<IAuthorService, AuthorService>()
+    .AddScoped<ISongService, SongService>()
+    .AddScoped<ISongsCollectionService, SongsCollectionService>()
+    .AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
+    .AddScoped<ISongRepository, SongRepository>()
+    .AddScoped<IAuthorRepository, AuthorRepository>()
+    .AddScoped<ISongsCollectionRepository, SongsCollectionRepository>()
+    .AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
