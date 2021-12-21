@@ -19,14 +19,14 @@ namespace MusicLibrary.Web.Controllers
         public async Task<ActionResult<UserProfileModel>> GetById([FromRoute] int id)
         {
             var model = await _service.GetUserProfileAsync(id);
-            return Ok(model);
+            return model != null ? Ok(model) : NotFound();
         }
 
         [HttpGet("{id}/collections")]
         public async Task<ActionResult<UserPlaylistsModel>> GetPlaylists([FromRoute] int id)
         {
             var model = await _service.GetUserPlaylistsAsync(id);
-            return Ok(model);
+            return model != null ? Ok(model) : NotFound();
         }
     }
 }

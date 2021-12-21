@@ -22,6 +22,10 @@ namespace MusicLibrary.Business
         public async Task<UserPlaylistsModel> GetUserPlaylistsAsync(int userId)
         {
             var user = await _unit.UserManager.FindByIdAsync(userId.ToString());
+            
+            if (user == null)
+                return null;
+            
             var playlists = await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(c => c.UserAuthorId == userId);
             user.Playlists = playlists.ToArray();
             return _mapper.Map<UserPlaylistsModel>(user);
@@ -30,6 +34,10 @@ namespace MusicLibrary.Business
         public async Task<UserProfileModel> GetUserProfileAsync(int userId)
         {
             var user = await _unit.UserManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+                return null;
+
             return _mapper.Map<UserProfileModel>(user);
         }
     }
