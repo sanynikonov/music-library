@@ -13,7 +13,7 @@ namespace MusicLibrary.Business
         public MapperProfile()
         {
             CreateMap<Author, AuthorModel>()
-                .ForMember(x => x.Albums, c => c.MapFrom(x => x.Albums))
+                //.ForMember(x => x.Albums, c => c.MapFrom(x => x.Albums))
                 .ReverseMap();
             CreateMap<Author, AuthorListItemModel>()
                 .ReverseMap();
@@ -27,6 +27,8 @@ namespace MusicLibrary.Business
                 .ReverseMap();
             CreateMap<SongsCollection, SongsCollectionListItemModel>()
                 .ReverseMap();
+            CreateMap<SongsCollectionType, string>()
+                .ConvertUsing(t => t.Name);
         }
     }
 }

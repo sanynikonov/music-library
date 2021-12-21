@@ -1,4 +1,5 @@
-﻿using MusicLibrary.Data;
+﻿using AutoMapper;
+using MusicLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,44 +11,26 @@ namespace MusicLibrary.Business
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unit;
+        private readonly IMapper _mapper;
 
-        public UserService(IUnitOfWork unit)
+        public UserService(IUnitOfWork unit, IMapper mapper)
         {
             _unit = unit;
+            _mapper = mapper;
         }
 
         public async Task<UserPlaylistsModel> GetUserPlaylistsAsync(int userId)
         {
             var user = await _unit.UserManager.FindByIdAsync(userId.ToString());
             var playlists = await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(c => c.UserAuthorId == userId);
-            return new UserPlaylistsModel
-            {
-                Id = user.Id,
-                Name = user.Name,
-                ProfilePicturePath = user.ProfilePicturePath,
-                UserName = user.UserName,
-                Playlists = playlists.Select(x => new SongsCollectionListItemModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    SongsCollectionType = x.SongsCollectionType.Name,
-                    Year = x.Year
-                })
-            };
+            user.Playlists = playlists.ToArray();
+            return _mapper.Map<UserPlaylistsModel>(user);
         }
 
         public async Task<UserProfileModel> GetUserProfileAsync(int userId)
         {
             var user = await _unit.UserManager.FindByIdAsync(userId.ToString());
-            return new UserProfileModel
-            {
-                Id = user.Id,
-                Bio = user.Bio,
-                Email = user.Email,
-                Name = user.Name,
-                ProfilePicturePath = user.ProfilePicturePath,
-                UserName = user.UserName
-            };
+            return _mapper.Map<UserProfileModel>(user);
         }
     }
 }
