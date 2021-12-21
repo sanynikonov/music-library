@@ -9,7 +9,6 @@ namespace MusicLibrary.Data
 {
     public class User : IdentityUser<int>, IBaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Bio { get; set; }
         public string ProfilePicturePath { get; set; }

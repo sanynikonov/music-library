@@ -13,6 +13,12 @@ namespace MusicLibrary.Data
         private readonly MusicLibraryContext _context;
         private IServiceProvider _serviceProvider;
 
+        public UnitOfWork(MusicLibraryContext context, IServiceProvider serviceProvider)
+        {
+            _context = context;
+            _serviceProvider = serviceProvider;
+        }
+
         private IRepository<Like> _likesRepository;
         private ISongRepository _songsRepository;
         private ISongsCollectionRepository _songsCollectionsRepository;

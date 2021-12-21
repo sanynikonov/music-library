@@ -15,7 +15,7 @@ namespace MusicLibrary.Web.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<UserProfileModel>> GetById([FromRoute] int id)
         {
             var model = await _service.GetUserProfileAsync(id);
