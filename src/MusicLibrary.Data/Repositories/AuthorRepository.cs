@@ -12,7 +12,7 @@ public class AuthorRepository : EfRepository<Author>, IAuthorRepository
 
     public async Task<Author> GetAuthorWithAlbumsAsync(int id)
     {
-        return await _dbContext.Authors
+        return await DbContext.Authors
             .Include(p => p.Albums)
             .ThenInclude(p => p.SongsCollectionType)
             .SingleOrDefaultAsync(a => a.Id == id);

@@ -21,7 +21,7 @@ public class SongsCollectionRepository : EfRepository<SongsCollection>, ISongsCo
 
     public async Task<SongsCollection> GetWithAuthorsAndSongsAndTypesAsync(int id)
     {
-        return await _dbContext.SongsCollections
+        return await DbContext.SongsCollections
             .Include(c => c.Authors)
             .Include(c => c.SongsCollectionType)
             .Include(c => c.Songs)

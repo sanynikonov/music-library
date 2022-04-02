@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
     <SpaProxyServerUrl>https://localhost:44403</SpaProxyServerUrl>
@@ -30,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MusicLibrary.Business\MusicLibrary.Business.csproj" />
-    <ProjectReference Include="..\MusicLibrary.Data\MusicLibrary.Data.csproj" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -14,7 +14,7 @@ public class SongRepository : EfRepository<Song>, ISongRepository
     public async Task<IEnumerable<Song>> GetAllSongsWithAuthorsAsync(Expression<Func<Song, bool>> predicate = null,
         int? pageNumber = null, int? pageSize = null)
     {
-        IQueryable<Song> query = _dbContext.Songs;
+        IQueryable<Song> query = DbContext.Songs;
 
         if (predicate != null) query = query.Where(predicate);
 

@@ -3,7 +3,6 @@
 using AutoMapper;
 using MusicLibrary.Business;
 using MusicLibrary.Business.Models;
-using MusicLibrary.Data;
 using MusicLibrary.Data.Entities;
 
 Console.WriteLine("Hello, World!");
