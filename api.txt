@@ -1,0 +1,26 @@
+view album/playlist - collection, authors short, songs
+collections/id
+search album/playlist - collection short
+collections?
+
+search songs - songs, authors short
+songs?
+
+view author works - author, albums short
+authors/id
+search authors - authors short
+authors?
+
+view user playlists - user, playlists short
+users/id/collections
+view user - user profile
+users/id
+
+set like for song
+songs/id/likes
+set like for collection
+collections/id/songs/id/likes
+add song to playlist
+collections/id/songs/id
+
+collection, collection short, author, authors short, songs, user, user profile

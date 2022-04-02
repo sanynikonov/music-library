@@ -1,80 +1,67 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
-namespace MusicLibrary.Data
+namespace MusicLibrary.Data;
+
+public class EfRepository<T> : IRepository<T> where T : class, IBaseEntity
 {
-    public class EfRepository<T> : IRepository<T> where T : class, IBaseEntity
+    protected readonly MusicLibraryContext _dbContext;
+
+    public EfRepository(MusicLibraryContext dbContext)
     {
-        protected readonly MusicLibraryContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public EfRepository(MusicLibraryContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public async Task<T> GetAsync(int id)
+    {
+        return await _dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);
+    }
 
-        public async Task<T> GetAsync(int id)
-        {
-            return await _dbContext.Set<T>().SingleOrDefaultAsync(e => e.Id == id);
-        }
+    public async Task<T> AddAsync(T entity)
+    {
+        await _dbContext.Set<T>().AddAsync(entity);
 
-        public async Task<T> AddAsync(T entity)
-        {
-            await _dbContext.Set<T>().AddAsync(entity);
+        return entity;
+    }
 
-            return entity;
-        }
+    public Task UpdateAsync(T entity)
+    {
+        _dbContext.Entry(entity).State = EntityState.Modified;
+        return Task.CompletedTask;
+    }
 
-        public Task UpdateAsync(T entity)
-        {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            return Task.CompletedTask;
-        }
+    public Task DeleteAsync(T entity)
+    {
+        _dbContext.Set<T>().Remove(entity);
+        return Task.CompletedTask;
+    }
 
-        public Task DeleteAsync(T entity)
-        {
-            _dbContext.Set<T>().Remove(entity);
-            return Task.CompletedTask;
-        }
+    public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate = null, int? pageNumber = null,
+        int? pageSize = null)
+    {
+        var query = CreateQuery(predicate, pageNumber, pageSize);
 
-        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate = null, int? pageNumber = null, int? pageSize = null)
-        {
-            IQueryable<T> query = CreateQuery(predicate, pageNumber, pageSize);
+        return await query.ToListAsync();
+    }
 
-            return await query.ToListAsync();
-        }
+    public async Task<int> CountAsync(Expression<Func<T, bool>> predicate = null)
+    {
+        IQueryable<T> query = _dbContext.Set<T>();
 
-        protected IQueryable<T> CreateQuery(Expression<Func<T, bool>> predicate, int? pageNumber, int? pageSize)
-        {
-            IQueryable<T> query = _dbContext.Set<T>();
+        if (predicate != null) query = query.Where(predicate);
 
-            if (predicate != null)
-            {
-                query = query.Where(predicate);
-            }
+        return await query.CountAsync();
+    }
 
-            if (pageNumber.HasValue && pageSize.HasValue)
-            {
-                query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
-            }
+    protected IQueryable<T> CreateQuery(Expression<Func<T, bool>> predicate, int? pageNumber, int? pageSize)
+    {
+        IQueryable<T> query = _dbContext.Set<T>();
 
-            return query;
-        }
+        if (predicate != null) query = query.Where(predicate);
 
-        public async Task<int> CountAsync(Expression<Func<T, bool>> predicate = null)
-        {
-            IQueryable<T> query = _dbContext.Set<T>();
+        if (pageNumber.HasValue && pageSize.HasValue)
+            query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
-            if (predicate != null)
-            {
-                query = query.Where(predicate);
-            }
-
-            return await query.CountAsync();
-        }
+        return query;
     }
 }

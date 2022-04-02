@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MusicLibrary.Data;
 
-namespace MusicLibrary.Data
+public interface IAuthorRepository : IRepository<Author>
 {
-    public interface IAuthorRepository : IRepository<Author>
-    {
-        Task<Author> GetAuthorWithAlbumsAsync(int id);
-    }
+    Task<Author> GetAuthorWithAlbumsAsync(int id);
 }

@@ -1,52 +1,49 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MusicLibrary.Data
+namespace MusicLibrary.Data;
+
+public class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private readonly MusicLibraryContext _context;
+    private IAuthorRepository _authorsRepository;
+
+    private IRepository<Like> _likesRepository;
+    private RoleManager<Role> _roleManager;
+    private readonly IServiceProvider _serviceProvider;
+    private SignInManager<User> _signInManager;
+    private ISongsCollectionRepository _songsCollectionsRepository;
+    private IRepository<SongsCollectionType> _songsCollectionTypesRepository;
+    private ISongRepository _songsRepository;
+    private UserManager<User> _userManager;
+
+    public UnitOfWork(MusicLibraryContext context, IServiceProvider serviceProvider)
     {
-        private readonly MusicLibraryContext _context;
-        private IServiceProvider _serviceProvider;
+        _context = context;
+        _serviceProvider = serviceProvider;
+    }
 
-        public UnitOfWork(MusicLibraryContext context, IServiceProvider serviceProvider)
-        {
-            _context = context;
-            _serviceProvider = serviceProvider;
-        }
+    public ISongRepository SongsRepository => _songsRepository ??= new SongRepository(_context);
 
-        private IRepository<Like> _likesRepository;
-        private ISongRepository _songsRepository;
-        private ISongsCollectionRepository _songsCollectionsRepository;
-        private IRepository<SongsCollectionType> _songsCollectionTypesRepository;
-        private IAuthorRepository _authorsRepository;
-        private SignInManager<User> _signInManager;
-        private UserManager<User> _userManager;
-        private RoleManager<Role> _roleManager;
+    public ISongsCollectionRepository SongsCollectionsRepository =>
+        _songsCollectionsRepository ??= new SongsCollectionRepository(_context);
 
-        public ISongRepository SongsRepository => _songsRepository ??= new SongRepository(_context);
+    public IRepository<SongsCollectionType> SongsCollectionTypesRepository =>
+        _songsCollectionTypesRepository ??= new EfRepository<SongsCollectionType>(_context);
 
-        public ISongsCollectionRepository SongsCollectionsRepository => _songsCollectionsRepository ??= new SongsCollectionRepository(_context);
+    public IRepository<Like> LikesRepository => _likesRepository ??= new EfRepository<Like>(_context);
 
-        public IRepository<SongsCollectionType> SongsCollectionTypesRepository => _songsCollectionTypesRepository ??= new EfRepository<SongsCollectionType>(_context);
+    public IAuthorRepository AuthorsRepository => _authorsRepository ??= new AuthorRepository(_context);
 
-        public IRepository<Like> LikesRepository => _likesRepository ??= new EfRepository<Like>(_context);
+    public SignInManager<User> SignInManager =>
+        _signInManager ??= _serviceProvider.GetRequiredService<SignInManager<User>>();
 
-        public IAuthorRepository AuthorsRepository => _authorsRepository ??= new AuthorRepository(_context);
+    public UserManager<User> UserManager => _userManager ??= _serviceProvider.GetRequiredService<UserManager<User>>();
 
-        public SignInManager<User> SignInManager => _signInManager ??= _serviceProvider.GetRequiredService<SignInManager<User>>();
+    public RoleManager<Role> RoleManager => _roleManager ??= _serviceProvider.GetRequiredService<RoleManager<Role>>();
 
-        public UserManager<User> UserManager => _userManager ??= _serviceProvider.GetRequiredService<UserManager<User>>();
-
-        public RoleManager<Role> RoleManager => _roleManager ??= _serviceProvider.GetRequiredService<RoleManager<Role>>();
-
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }

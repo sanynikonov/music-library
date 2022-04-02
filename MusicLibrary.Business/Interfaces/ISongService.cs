@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MusicLibrary.Business;
 
-namespace MusicLibrary.Business
+public interface ISongService
 {
-    public interface ISongService
-    {
-        Task<IEnumerable<SongModel>> GetAllSongsAsync(SearchFilterModel filter);
-        Task<int> AddAsync(SongModel model);
-        Task AddToPlaylistAsync(int songId, int playlistId);
-        Task LikeAsync(int songId, int userId);
-    }
+    Task<IEnumerable<SongModel>> GetAllSongsAsync(SearchFilterModel filter);
+    Task<int> AddAsync(SongModel model);
+    Task AddToPlaylistAsync(int songId, int playlistId);
+    Task LikeAsync(int songId, int userId);
 }
