@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using MusicLibrary.Data.Entities;
+using MusicLibrary.Data.Interfaces;
+using MusicLibrary.Data.Repositories;
 
-namespace MusicLibrary.Data;
+namespace MusicLibrary.Data.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {

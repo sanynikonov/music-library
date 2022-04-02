@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MusicLibrary.Data;
+using MusicLibrary.Data.Entities;
 
 namespace MusicLibrary.Web;
 

@@ -1,8 +1,11 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using MusicLibrary.Data;
+using MusicLibrary.Business.Interfaces;
+using MusicLibrary.Business.Models;
+using MusicLibrary.Data.Entities;
+using MusicLibrary.Data.UnitOfWork;
 
-namespace MusicLibrary.Business;
+namespace MusicLibrary.Business.Services;
 
 public class AuthService : IAuthService
 {

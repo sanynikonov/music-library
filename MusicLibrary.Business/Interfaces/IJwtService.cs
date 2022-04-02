@@ -1,4 +1,4 @@
-﻿namespace MusicLibrary.Business;
+﻿namespace MusicLibrary.Business.Interfaces;
 
 public interface IJwtService
 {

@@ -1,7 +1,9 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using MusicLibrary.Data.Entities;
+using MusicLibrary.Data.Interfaces;
 
-namespace MusicLibrary.Data;
+namespace MusicLibrary.Data.Repositories;
 
 public class SongRepository : EfRepository<Song>, ISongRepository
 {

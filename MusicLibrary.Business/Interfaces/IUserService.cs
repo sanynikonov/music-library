@@ -1,4 +1,6 @@
-﻿namespace MusicLibrary.Business;
+﻿using MusicLibrary.Business.Models;
+
+namespace MusicLibrary.Business.Interfaces;
 
 public interface IUserService
 {

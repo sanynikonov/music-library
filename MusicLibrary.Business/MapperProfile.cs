@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using MusicLibrary.Business.Models;
 using MusicLibrary.Data;
+using MusicLibrary.Data.Entities;
 
 namespace MusicLibrary.Business;
 

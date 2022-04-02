@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MusicLibrary.Business;
+using MusicLibrary.Business.Interfaces;
+using MusicLibrary.Business.Models;
 
 namespace MusicLibrary.Web.Controllers;
 

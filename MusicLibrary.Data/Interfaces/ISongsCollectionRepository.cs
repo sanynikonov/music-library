@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
+using MusicLibrary.Data.Entities;
 
-namespace MusicLibrary.Data;
+namespace MusicLibrary.Data.Interfaces;
 
 public interface ISongsCollectionRepository : IRepository<SongsCollection>
 {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MusicLibrary.Data.Entities;
+using MusicLibrary.Data.Interfaces;
 
-namespace MusicLibrary.Data;
+namespace MusicLibrary.Data.UnitOfWork;
 
 public interface IUnitOfWork
 {

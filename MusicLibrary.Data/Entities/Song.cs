@@ -1,4 +1,4 @@
-﻿namespace MusicLibrary.Data;
+﻿namespace MusicLibrary.Data.Entities;
 
 public class Song : IBaseEntity
 {

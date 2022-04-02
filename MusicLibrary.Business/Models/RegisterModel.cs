@@ -1,4 +1,4 @@
-﻿namespace MusicLibrary.Business;
+﻿namespace MusicLibrary.Business.Models;
 
 public class RegisterModel
 {

@@ -3,8 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MusicLibrary.Business.Interfaces;
 
-namespace MusicLibrary.Business;
+namespace MusicLibrary.Business.Services;
 
 public class JwtService : IJwtService
 {

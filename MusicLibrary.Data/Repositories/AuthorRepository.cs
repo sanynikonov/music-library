@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MusicLibrary.Data.Entities;
+using MusicLibrary.Data.Interfaces;
 
-namespace MusicLibrary.Data;
+namespace MusicLibrary.Data.Repositories;
 
 public class AuthorRepository : EfRepository<Author>, IAuthorRepository
 {

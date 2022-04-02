@@ -2,7 +2,9 @@
 
 using AutoMapper;
 using MusicLibrary.Business;
+using MusicLibrary.Business.Models;
 using MusicLibrary.Data;
+using MusicLibrary.Data.Entities;
 
 Console.WriteLine("Hello, World!");
 var mapper = new Mapper(new MapperConfiguration(opt => opt.AddProfile<MapperProfile>()));
