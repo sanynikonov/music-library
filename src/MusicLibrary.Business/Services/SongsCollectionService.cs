@@ -14,22 +14,6 @@ public class SongsCollectionService : ISongsCollectionService
         _unit = unit;
     }
 
-    public async Task<IEnumerable<SongsCollectionListItemModel>> GetAllSongsCollectionsAsync(
-        SongsCollectionSearchFilterModel filter)
-    {
-        var collections =
-            await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(c => c.Name.Contains(filter.SearchString),
-                filter.PageNumber, filter.PageSize);
-
-        return collections.Select(c => new SongsCollectionListItemModel
-        {
-            Id = c.Id,
-            Name = c.Name,
-            Year = c.Year,
-            SongsCollectionType = c.SongsCollectionType.Name
-        }).ToArray();
-    }
-
     public async Task<SongsCollectionModel> GetSongsCollectionAsync(int id)
     {
         var collection = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(id);

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using MusicLibrary.Business.Collections;
+using MusicLibrary.Business.Core;
 using MusicLibrary.Business.Models;
 using MusicLibrary.Data;
 using MusicLibrary.Data.Entities;
@@ -26,5 +28,8 @@ public class MapperProfile : Profile
             .ReverseMap();
         CreateMap<SongsCollectionType, string>()
             .ConvertUsing(t => t.Name);
+
+        CreateMap<SongsCollectionSearchFilterModel, ListCollectionQuery>();
+        CreateMap(typeof(PagedQueryResponse<>), typeof(PagedResponse<>));
     }
 }

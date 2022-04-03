@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using MusicLibrary.Business;
+using MusicLibrary.Business.Collections;
 using MusicLibrary.Business.Interfaces;
 using MusicLibrary.Business.Models;
 
@@ -10,18 +13,28 @@ namespace MusicLibrary.Web.Controllers;
 public class CollectionsController : ControllerBase
 {
     private readonly ISongsCollectionService _service;
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public CollectionsController(ISongsCollectionService service)
+    public CollectionsController(ISongsCollectionService service, IMediator mediator, IMapper mapper)
     {
         _service = service;
+        _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SongsCollectionListItemModel>>> GetAll(
+    public async Task<ActionResult<PagedResponse<SongsCollectionListItemModel>>> GetAll(
         [FromQuery] SongsCollectionSearchFilterModel filter)
     {
-        var result = await _service.GetAllSongsCollectionsAsync(filter);
-        return Ok(result);
+        var result = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
+
+        if (!result.HasData)
+        {
+            return NotFound();
+        }
+
+        return Ok(_mapper.Map<PagedResponse<SongsCollectionListItemModel>>(result));
     }
 
     [HttpGet("{id}")]

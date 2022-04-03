@@ -1,5 +1,8 @@
+using System.Reflection;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MusicLibrary.Business;
+using MusicLibrary.Business.Collections;
 using MusicLibrary.Business.Interfaces;
 using MusicLibrary.Business.Services;
 using MusicLibrary.Data;
@@ -31,6 +34,7 @@ builder.Services
     .AddScoped<IAuthorRepository, AuthorRepository>()
     .AddScoped<ISongsCollectionRepository, SongsCollectionRepository>()
     .AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddMediatR(Assembly.GetAssembly(typeof(ListCollectionQuery)));
 
 var app = builder.Build();
 
@@ -59,7 +63,6 @@ app.MapControllerRoute(
     "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
-;
 
 await app.SeedData();
 

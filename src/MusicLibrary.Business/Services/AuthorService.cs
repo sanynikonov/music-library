@@ -37,7 +37,7 @@ public class AuthorService : IAuthorService
                 Id = a.Id,
                 Name = a.Name,
                 Year = a.Year,
-                SongsCollectionType = a.SongsCollectionType.Name
+                CollectionType = a.SongsCollectionType.Name
             }).ToArray()
         };
     }
