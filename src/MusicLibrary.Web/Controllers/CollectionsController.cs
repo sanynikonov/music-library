@@ -23,7 +23,7 @@ public class CollectionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PagedResponse<SongsCollectionListItemModel>>> GetAll(
+    public async Task<ActionResult<PagedResponse<CollectionItem>>> GetAll(
         [FromQuery] SongsCollectionSearchFilterModel filter)
     {
         var result = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
@@ -33,11 +33,11 @@ public class CollectionsController : ControllerBase
             return NotFound();
         }
 
-        return Ok(_mapper.Map<PagedResponse<SongsCollectionListItemModel>>(result));
+        return Ok(_mapper.Map<PagedResponse<CollectionItem>>(result));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<SongsCollectionModel>> GetById([FromRoute] int id)
+    public async Task<ActionResult<CollectionDetails>> GetById([FromRoute] int id)
     {
         var result = await _mediator.Send(new ListCollectionDetailsQuery(id));
 
@@ -50,9 +50,9 @@ public class CollectionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<int>> Post([FromBody] SongsCollectionModel model)
+    public async Task<ActionResult<int>> Post([FromBody] CollectionDetails details)
     {
-        var result = await _service.AddAsync(model);
+        var result = await _service.AddAsync(details);
         return Ok(result);
     }
 

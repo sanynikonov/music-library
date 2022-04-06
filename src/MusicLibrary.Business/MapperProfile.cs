@@ -22,9 +22,9 @@ public class MapperProfile : Profile
             .ReverseMap();
         CreateMap<Song, SongModel>()
             .ReverseMap();
-        CreateMap<SongsCollection, SongsCollectionModel>()
+        CreateMap<SongsCollection, CollectionDetails>()
             .ReverseMap();
-        CreateMap<SongsCollection, SongsCollectionListItemModel>()
+        CreateMap<SongsCollection, CollectionItem>()
             .ReverseMap();
         CreateMap<SongsCollectionType, string>()
             .ConvertUsing(t => t.Name);

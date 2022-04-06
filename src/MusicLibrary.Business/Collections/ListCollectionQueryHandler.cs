@@ -8,7 +8,7 @@ using MusicLibrary.Data.UnitOfWork;
 
 namespace MusicLibrary.Business.Collections;
 
-public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, PagedQueryResponse<SongsCollectionListItemModel>>
+public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, PagedQueryResponse<CollectionItem>>
 {
     private readonly IUnitOfWork _unit;
     private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
         _mapper = mapper;
     }
 
-    public async Task<PagedQueryResponse<SongsCollectionListItemModel>> Handle(ListCollectionQuery request, CancellationToken cancellationToken)
+    public async Task<PagedQueryResponse<CollectionItem>> Handle(ListCollectionQuery request, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(request.SearchString) || string.IsNullOrEmpty(request.CollectionType))
         {
@@ -34,12 +34,12 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
             await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(predicate, request.PageNumber, request.PageSize);
         var totalCount = await _unit.SongsCollectionsRepository.CountAsync(predicate);
 
-        return new PagedQueryResponse<SongsCollectionListItemModel>
+        return new PagedQueryResponse<CollectionItem>
         {
             PageNumber = request.PageNumber,
             PageSize = request.PageSize,
             TotalCount = totalCount,
-            Data = _mapper.Map<IEnumerable<SongsCollectionListItemModel>>(collections).ToArray()
+            Data = _mapper.Map<IEnumerable<CollectionItem>>(collections).ToArray()
         };
     }
 }

@@ -14,7 +14,7 @@ public class SongsCollectionService : ISongsCollectionService
         _unit = unit;
     }
     
-    public async Task<int> AddAsync(SongsCollectionModel model)
+    public async Task<int> AddAsync(CollectionDetails details)
     {
         //var names = model.Authors.Select(a => a.Name).ToArray();
         //var authors = await _unit.AuthorsRepository.GetAsync(a => names.Contains(a.Name));
@@ -22,9 +22,9 @@ public class SongsCollectionService : ISongsCollectionService
         //var newAuthors = model.Authors.Where(a => existingAuthorsIds.Contains(a.Id)).Select();
         var collection = new SongsCollection
         {
-            Name = model.Name,
-            Year = model.Year,
-            Authors = model.Authors.Select(a => new Author {Name = a.Name}).ToArray()
+            Name = details.Name,
+            Year = details.Year,
+            Authors = details.Authors.Select(a => new Author {Name = a.Name}).ToArray()
         };
 
         await _unit.SongsCollectionsRepository.AddAsync(collection);

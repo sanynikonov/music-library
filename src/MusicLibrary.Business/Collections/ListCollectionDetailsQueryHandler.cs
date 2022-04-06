@@ -5,7 +5,7 @@ using MusicLibrary.Data.UnitOfWork;
 
 namespace MusicLibrary.Business.Collections;
 
-public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionDetailsQuery, SongsCollectionModel>
+public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionDetailsQuery, CollectionDetails>
 {
     private readonly IUnitOfWork _unit;
     private readonly IMapper _mapper;
@@ -16,7 +16,7 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
         _mapper = mapper;
     }
 
-    public async Task<SongsCollectionModel> Handle(ListCollectionDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<CollectionDetails> Handle(ListCollectionDetailsQuery request, CancellationToken cancellationToken)
     {
         if (request.CollectionId <= 0)
         {
@@ -30,7 +30,7 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
             return null;
         }
 
-        var model = _mapper.Map<SongsCollectionModel>(collection);
+        var model = _mapper.Map<CollectionDetails>(collection);
 
         foreach (var song in model.Songs)
         {

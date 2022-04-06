@@ -7,6 +7,6 @@ public class UserPlaylistsModel
     public string UserName { get; set; }
     public string ProfilePicturePath { get; set; }
 
-    public IEnumerable<SongsCollectionListItemModel> Playlists { get; set; } =
-        Enumerable.Empty<SongsCollectionListItemModel>();
+    public IEnumerable<CollectionItem> Playlists { get; set; } =
+        Enumerable.Empty<CollectionItem>();
 }

@@ -4,6 +4,6 @@ namespace MusicLibrary.Business.Interfaces;
 
 public interface ISongsCollectionService
 {
-    Task<int> AddAsync(SongsCollectionModel model);
+    Task<int> AddAsync(CollectionDetails details);
     Task LikeAsync(int collectionId, int userId);
 }

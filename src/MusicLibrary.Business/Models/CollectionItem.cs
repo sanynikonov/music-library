@@ -1,6 +1,6 @@
 ﻿namespace MusicLibrary.Business.Models;
 
-public class SongsCollectionListItemModel
+public class CollectionItem
 {
     public int Id { get; set; }
     public int Year { get; set; }
