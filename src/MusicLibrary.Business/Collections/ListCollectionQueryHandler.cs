@@ -21,14 +21,14 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
 
     public async Task<PagedQueryResponse<SongsCollectionListItemModel>> Handle(ListCollectionQuery request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(request.SearchString) || string.IsNullOrEmpty(request.SongsCollectionType))
+        if (string.IsNullOrEmpty(request.SearchString) || string.IsNullOrEmpty(request.CollectionType))
         {
             throw new ArgumentException("Wrong searching parameters", nameof(request));
         }
 
         Expression<Func<SongsCollection, bool>> predicate = c =>
             c.Name.Contains(request.SearchString) && 
-            c.SongsCollectionType.Name.Equals(request.SongsCollectionType);
+            c.SongsCollectionType.Name.Equals(request.CollectionType);
         
         var collections = 
             await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(predicate, request.PageNumber, request.PageSize);

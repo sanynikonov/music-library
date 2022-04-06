@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MusicLibrary.Business;
 using MusicLibrary.Business.Collections;
 using MusicLibrary.Business.Interfaces;
 using MusicLibrary.Business.Models;
@@ -40,7 +39,13 @@ public class CollectionsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<SongsCollectionModel>> GetById([FromRoute] int id)
     {
-        var result = await _service.GetSongsCollectionAsync(id);
+        var result = await _mediator.Send(new ListCollectionDetailsQuery(id));
+
+        if (result is null)
+        {
+            return NotFound();
+        }
+
         return Ok(result);
     }
 

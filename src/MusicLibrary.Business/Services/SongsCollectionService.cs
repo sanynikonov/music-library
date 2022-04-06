@@ -13,48 +13,7 @@ public class SongsCollectionService : ISongsCollectionService
     {
         _unit = unit;
     }
-
-    public async Task<SongsCollectionModel> GetSongsCollectionAsync(int id)
-    {
-        var collection = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(id);
-
-        var model = new SongsCollectionModel
-        {
-            Id = collection.Id,
-            Name = collection.Name,
-            Year = collection.Year,
-            SongsCollectionType = collection.SongsCollectionType.Name,
-            UserAuthorId = collection.UserAuthorId,
-            Authors = collection.Authors.Select(a => new AuthorListItemModel
-            {
-                Id = a.Id,
-                Name = a.Name
-            })
-        };
-
-        var songs = new List<SongModel>();
-        foreach (var song in collection.Songs)
-        {
-            var songId = song.Id;
-            songs.Add(new SongModel
-            {
-                Name = song.Name,
-                Id = song.Id,
-                AlbumId = song.AlbumId,
-                AudioPath = song.AudioPath,
-                Authors = song.Authors.Select(a => new AuthorListItemModel
-                {
-                    Id = a.Id,
-                    Name = a.Name
-                }).ToArray(),
-                LikesCount = await _unit.LikesRepository.CountAsync(l => songId == l.SongId)
-            });
-        }
-
-        model.Songs = songs;
-        return model;
-    }
-
+    
     public async Task<int> AddAsync(SongsCollectionModel model)
     {
         //var names = model.Authors.Select(a => a.Name).ToArray();
