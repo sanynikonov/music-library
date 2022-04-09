@@ -17,7 +17,7 @@ public class SongsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SongModel>>> GetAll([FromQuery] SongsCollectionSearchFilterModel filter)
+    public async Task<ActionResult<IEnumerable<SongModel>>> GetAll([FromQuery] SearchFilterModel filter)
     {
         var songs = await _service.GetAllSongsAsync(filter);
         return Ok(songs);

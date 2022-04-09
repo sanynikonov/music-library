@@ -29,7 +29,7 @@ public class MapperProfile : Profile
         CreateMap<SongsCollectionType, string>()
             .ConvertUsing(t => t.Name);
 
-        CreateMap<SongsCollectionSearchFilterModel, ListCollectionQuery>();
+        CreateMap<CollectionSearchFilterModel, ListCollectionQuery>();
         CreateMap(typeof(PagedQueryResponse<>), typeof(PagedResponse<>));
     }
 }

@@ -12,7 +12,7 @@ using MusicLibrary.Data.Entities;
 using MusicLibrary.Data.Interfaces;
 using MusicLibrary.Data.Repositories;
 using MusicLibrary.Data.UnitOfWork;
-using MusicLibrary.Web;
+using MusicLibrary.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

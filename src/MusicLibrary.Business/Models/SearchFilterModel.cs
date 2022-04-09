@@ -7,7 +7,7 @@ public class SearchFilterModel
     public int PageNumber { get; set; } = 1;
 }
 
-public class SongsCollectionSearchFilterModel : SearchFilterModel
+public class CollectionSearchFilterModel : SearchFilterModel
 {
     public string CollectionType { get; set; }
 }

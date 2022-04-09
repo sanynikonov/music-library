@@ -24,7 +24,7 @@ public class CollectionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PagedResponse<CollectionItem>>> GetAll([FromQuery] SongsCollectionSearchFilterModel filter)
+    public async Task<ActionResult<PagedResponse<CollectionItem>>> GetAll([FromQuery] CollectionSearchFilterModel filter)
     {
         var result = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
         return result.ToActionResult(_mapper);
