@@ -21,11 +21,6 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
 
     public async Task<PagedQueryResponse<CollectionItem>> Handle(ListCollectionQuery request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(request.SearchString) || string.IsNullOrEmpty(request.CollectionType))
-        {
-            throw new ArgumentException("Wrong searching parameters", nameof(request));
-        }
-
         Expression<Func<SongsCollection, bool>> predicate = c =>
             c.Name.Contains(request.SearchString) && 
             c.SongsCollectionType.Name.Equals(request.CollectionType);
@@ -34,12 +29,11 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
             await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(predicate, request.PageNumber, request.PageSize);
         var totalCount = await _unit.SongsCollectionsRepository.CountAsync(predicate);
 
-        return new PagedQueryResponse<CollectionItem>
+        return new PagedQueryResponse<CollectionItem>(_mapper.Map<IEnumerable<CollectionItem>>(collections).ToArray())
         {
             PageNumber = request.PageNumber,
             PageSize = request.PageSize,
             TotalCount = totalCount,
-            Data = _mapper.Map<IEnumerable<CollectionItem>>(collections).ToArray()
         };
     }
 }

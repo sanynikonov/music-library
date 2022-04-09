@@ -1,8 +1,10 @@
 using System.Reflection;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MusicLibrary.Business;
 using MusicLibrary.Business.Collections;
+using MusicLibrary.Business.Core.Behaviours;
 using MusicLibrary.Business.Interfaces;
 using MusicLibrary.Business.Services;
 using MusicLibrary.Data;
@@ -34,7 +36,9 @@ builder.Services
     .AddScoped<IAuthorRepository, AuthorRepository>()
     .AddScoped<ISongsCollectionRepository, SongsCollectionRepository>()
     .AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddMediatR(Assembly.GetAssembly(typeof(ListCollectionQuery)));
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(ListCollectionQueryValidator));
+builder.Services.AddMediatR(Assembly.GetAssembly(typeof(ListCollectionQuery)))
+    .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
 var app = builder.Build();
 

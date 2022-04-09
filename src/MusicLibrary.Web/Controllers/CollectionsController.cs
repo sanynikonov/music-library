@@ -28,12 +28,9 @@ public class CollectionsController : ControllerBase
     {
         var result = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
 
-        if (!result.HasData)
-        {
-            return NotFound();
-        }
-
-        return Ok(_mapper.Map<PagedResponse<CollectionItem>>(result));
+        return !result.IsValid ? BadRequest(result.Errors)
+            : !result.HasData ? NotFound()
+                : Ok(_mapper.Map<PagedResponse<CollectionItem>>(result));
     }
 
     [HttpGet("{id}")]
