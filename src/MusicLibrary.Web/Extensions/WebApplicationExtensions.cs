@@ -2,7 +2,7 @@
 using MusicLibrary.Data;
 using MusicLibrary.Data.Entities;
 
-namespace MusicLibrary.Web;
+namespace MusicLibrary.Web.Extensions;
 
 public static class WebApplicationExtensions
 {

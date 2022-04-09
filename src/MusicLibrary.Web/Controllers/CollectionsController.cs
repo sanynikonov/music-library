@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MusicLibrary.Business.Collections;
 using MusicLibrary.Business.Interfaces;
 using MusicLibrary.Business.Models;
+using MusicLibrary.Web.Extensions;
 
 namespace MusicLibrary.Web.Controllers;
 
@@ -23,14 +24,10 @@ public class CollectionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PagedResponse<CollectionItem>>> GetAll(
-        [FromQuery] SongsCollectionSearchFilterModel filter)
+    public async Task<ActionResult<PagedResponse<CollectionItem>>> GetAll([FromQuery] SongsCollectionSearchFilterModel filter)
     {
         var result = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
-
-        return !result.IsValid ? BadRequest(result.Errors)
-            : !result.HasData ? NotFound()
-                : Ok(_mapper.Map<PagedResponse<CollectionItem>>(result));
+        return result.ToActionResult(_mapper);
     }
 
     [HttpGet("{id}")]
