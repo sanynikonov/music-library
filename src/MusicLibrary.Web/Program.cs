@@ -13,6 +13,7 @@ using MusicLibrary.Data.Interfaces;
 using MusicLibrary.Data.Repositories;
 using MusicLibrary.Data.UnitOfWork;
 using MusicLibrary.Web.Extensions;
+using MusicLibrary.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,7 @@ builder.Services
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(ListCollectionQueryValidator));
 builder.Services.AddMediatR(Assembly.GetAssembly(typeof(ListCollectionQuery)))
     .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -55,13 +57,13 @@ if (app.Environment.IsDevelopment())
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+app.UseHsts();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapControllerRoute(
     "default",
     "{controller}/{action=Index}/{id?}");
