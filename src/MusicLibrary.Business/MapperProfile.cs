@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MusicLibrary.Business.Collections;
 using MusicLibrary.Business.Core;
+using MusicLibrary.Business.Core.Responses;
 using MusicLibrary.Business.Models;
 using MusicLibrary.Data;
 using MusicLibrary.Data.Entities;

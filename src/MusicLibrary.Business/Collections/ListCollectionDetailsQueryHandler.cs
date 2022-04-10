@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
+using MusicLibrary.Business.Core.Responses;
 using MusicLibrary.Business.Models;
 using MusicLibrary.Data.UnitOfWork;
 
 namespace MusicLibrary.Business.Collections;
 
-public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionDetailsQuery, CollectionDetails>
+public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionDetailsQuery, Response<CollectionDetails>>
 {
     private readonly IUnitOfWork _unit;
     private readonly IMapper _mapper;
@@ -16,18 +17,13 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
         _mapper = mapper;
     }
 
-    public async Task<CollectionDetails> Handle(ListCollectionDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<Response<CollectionDetails>> Handle(ListCollectionDetailsQuery request, CancellationToken cancellationToken)
     {
-        if (request.CollectionId <= 0)
-        {
-            throw new ArgumentException("Id should be higher than 0", nameof(request.CollectionId));
-        }
-
         var collection = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(request.CollectionId);
 
         if (collection is null)
         {
-            return null;
+            return new Response<CollectionDetails>();
         }
 
         var model = _mapper.Map<CollectionDetails>(collection);
@@ -37,6 +33,6 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
             song.LikesCount = await _unit.LikesRepository.CountAsync(l => song.Id == l.SongId);
         }
 
-        return model;
+        return new Response<CollectionDetails>(model);
     }
 }

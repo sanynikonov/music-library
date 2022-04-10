@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
 using MediatR;
-using MusicLibrary.Business.Core;
+using MusicLibrary.Business.Core.Responses;
 using MusicLibrary.Business.Models;
 using MusicLibrary.Data.Entities;
 using MusicLibrary.Data.UnitOfWork;

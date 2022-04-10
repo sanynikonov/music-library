@@ -26,21 +26,15 @@ public class CollectionsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<PagedResponse<CollectionItem>>> GetAll([FromQuery] CollectionSearchFilterModel filter)
     {
-        var result = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
-        return result.ToActionResult(_mapper);
+        var response = await _mediator.Send(_mapper.Map<ListCollectionQuery>(filter));
+        return response.ToActionResult(_mapper);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<CollectionDetails>> GetById([FromRoute] int id)
     {
-        var result = await _mediator.Send(new ListCollectionDetailsQuery(id));
-
-        if (result is null)
-        {
-            return NotFound();
-        }
-
-        return Ok(result);
+        var response = await _mediator.Send(new ListCollectionDetailsQuery(id));
+        return response.ToActionResult();
     }
 
     [HttpPost]
