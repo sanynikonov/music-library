@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MusicLibrary.Business;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using MusicLibrary.Business.Authors;
 using MusicLibrary.Business.Interfaces;
 using MusicLibrary.Business.Models;
+using MusicLibrary.Web.Extensions;
 
 namespace MusicLibrary.Web.Controllers;
 
@@ -10,17 +13,21 @@ namespace MusicLibrary.Web.Controllers;
 public class AuthorsController : ControllerBase
 {
     private readonly IAuthorService _service;
+    private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public AuthorsController(IAuthorService service)
+    public AuthorsController(IAuthorService service, IMediator mediator, IMapper mapper)
     {
         _service = service;
+        _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AuthorListItemModel>>> GetAll([FromQuery] SearchFilterModel filter)
+    public async Task<ActionResult<PagedResponse<AuthorItem>>> GetAll([FromQuery] SearchFilterModel filter, CancellationToken cancellationToken)
     {
-        var authors = await _service.GetAllAuthorsAsync(filter);
-        return Ok(authors);
+        var response = await _mediator.Send(_mapper.Map<ListAuthorsQuery>(filter), cancellationToken);
+        return response.ToActionResult(_mapper);
     }
 
     [HttpGet("{id}")]

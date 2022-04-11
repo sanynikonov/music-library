@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using MusicLibrary.Business.Authors;
 using MusicLibrary.Business.Collections;
-using MusicLibrary.Business.Core;
 using MusicLibrary.Business.Core.Responses;
 using MusicLibrary.Business.Models;
-using MusicLibrary.Data;
 using MusicLibrary.Data.Entities;
 
 namespace MusicLibrary.Business;
@@ -12,10 +11,10 @@ public class MapperProfile : Profile
 {
     public MapperProfile()
     {
-        CreateMap<Author, AuthorModel>()
+        CreateMap<Data.Entities.Author, AuthorModel>()
             //.ForMember(x => x.Albums, c => c.MapFrom(x => x.Albums))
             .ReverseMap();
-        CreateMap<Author, AuthorListItemModel>()
+        CreateMap<Data.Entities.Author, AuthorItem>()
             .ReverseMap();
         CreateMap<User, UserProfileModel>()
             .ReverseMap();
@@ -31,6 +30,8 @@ public class MapperProfile : Profile
             .ConvertUsing(t => t.Name);
 
         CreateMap<CollectionSearchFilterModel, ListCollectionQuery>();
+        CreateMap<SearchFilterModel, ListAuthorsQuery>();
+
         CreateMap(typeof(PagedQueryResponse<>), typeof(PagedResponse<>));
     }
 }

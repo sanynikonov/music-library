@@ -8,5 +8,5 @@ public class CollectionDetails
     public string SongsCollectionType { get; set; }
     public int UserAuthorId { get; set; }
     public IEnumerable<SongModel> Songs { get; set; } = Enumerable.Empty<SongModel>();
-    public IEnumerable<AuthorListItemModel> Authors { get; set; } = Enumerable.Empty<AuthorListItemModel>();
+    public IEnumerable<AuthorItem> Authors { get; set; } = Enumerable.Empty<AuthorItem>();
 }

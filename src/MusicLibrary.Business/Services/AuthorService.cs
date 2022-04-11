@@ -13,18 +13,6 @@ public class AuthorService : IAuthorService
         _unit = unit;
     }
 
-    public async Task<IEnumerable<AuthorListItemModel>> GetAllAuthorsAsync(SearchFilterModel filter)
-    {
-        var authors = await _unit.AuthorsRepository.GetAsync(a => a.Name.Contains(filter.SearchString),
-            filter.PageNumber, filter.PageSize);
-        var models = authors.Select(a => new AuthorListItemModel
-        {
-            Id = a.Id,
-            Name = a.Name
-        }).ToArray();
-        return models;
-    }
-
     public async Task<AuthorModel> GetAuthorAsync(int id)
     {
         var author = await _unit.AuthorsRepository.GetAuthorWithAlbumsAsync(id);

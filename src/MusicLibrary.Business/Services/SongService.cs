@@ -28,7 +28,7 @@ public class SongService : ISongService
                 Id = song.Id,
                 AlbumId = song.AlbumId,
                 AudioPath = song.AudioPath,
-                Authors = song.Authors.Select(a => new AuthorListItemModel
+                Authors = song.Authors.Select(a => new AuthorItem
                 {
                     Id = a.Id,
                     Name = a.Name
@@ -47,7 +47,7 @@ public class SongService : ISongService
             Name = model.Name,
             AlbumId = model.AlbumId,
             AudioPath = model.AudioPath,
-            Authors = model.Authors.Select(a => new Author {Name = a.Name}).ToArray()
+            Authors = model.Authors.Select(a => new Data.Entities.Author {Name = a.Name}).ToArray()
         };
 
         await _unit.SongsRepository.AddAsync(song);

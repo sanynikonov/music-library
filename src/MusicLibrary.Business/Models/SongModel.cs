@@ -7,5 +7,5 @@ public class SongModel
     public string Name { get; set; }
     public string AudioPath { get; set; }
     public int AlbumId { get; set; }
-    public IEnumerable<AuthorListItemModel> Authors { get; set; } = Enumerable.Empty<AuthorListItemModel>();
+    public IEnumerable<AuthorItem> Authors { get; set; } = Enumerable.Empty<AuthorItem>();
 }

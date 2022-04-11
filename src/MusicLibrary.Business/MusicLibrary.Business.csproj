@@ -20,6 +20,7 @@
     <Folder Include="Collections\" />
     <Folder Include="Core\Behaviours\" />
     <Folder Include="Entities\" />
+    <Folder Include="Authors\" />
   </ItemGroup>
 
 </Project>
