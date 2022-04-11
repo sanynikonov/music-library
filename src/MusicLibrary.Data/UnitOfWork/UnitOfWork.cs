@@ -9,15 +9,15 @@ namespace MusicLibrary.Data.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly MusicLibraryContext _context;
-    private IAuthorRepository _authorsRepository;
-
-    private IRepository<Like> _likesRepository;
-    private RoleManager<Role> _roleManager;
     private readonly IServiceProvider _serviceProvider;
-    private SignInManager<User> _signInManager;
+
+    private IAuthorRepository _authorsRepository;
+    private IRepository<Like> _likesRepository;
     private ISongsCollectionRepository _songsCollectionsRepository;
     private IRepository<SongsCollectionType> _songsCollectionTypesRepository;
     private ISongRepository _songsRepository;
+    private RoleManager<Role> _roleManager;
+    private SignInManager<User> _signInManager;
     private UserManager<User> _userManager;
 
     public UnitOfWork(MusicLibraryContext context, IServiceProvider serviceProvider)
@@ -45,8 +45,8 @@ public class UnitOfWork : IUnitOfWork
 
     public RoleManager<Role> RoleManager => _roleManager ??= _serviceProvider.GetRequiredService<RoleManager<Role>>();
 
-    public async Task SaveChangesAsync()
+    public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

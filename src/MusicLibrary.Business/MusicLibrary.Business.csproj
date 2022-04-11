@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Collections\" />
     <Folder Include="Core\Behaviours\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
 
 </Project>

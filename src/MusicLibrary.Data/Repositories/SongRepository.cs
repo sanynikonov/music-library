@@ -12,7 +12,7 @@ public class SongRepository : EfRepository<Song>, ISongRepository
     }
 
     public async Task<IEnumerable<Song>> GetAllSongsWithAuthorsAsync(Expression<Func<Song, bool>> predicate = null,
-        int? pageNumber = null, int? pageSize = null)
+        int? pageNumber = null, int? pageSize = null, CancellationToken cancellationToken = default)
     {
         IQueryable<Song> query = DbContext.Songs;
 
@@ -23,6 +23,6 @@ public class SongRepository : EfRepository<Song>, ISongRepository
 
         return await query
             .Include(p => p.Authors)
-            .ToArrayAsync();
+            .ToArrayAsync(cancellationToken);
     }
 }

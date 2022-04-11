@@ -19,7 +19,7 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
 
     public async Task<Response<CollectionDetails>> Handle(ListCollectionDetailsQuery request, CancellationToken cancellationToken)
     {
-        var collection = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(request.CollectionId);
+        var collection = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(request.CollectionId, cancellationToken);
 
         if (collection is null)
         {
@@ -30,7 +30,7 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
 
         foreach (var song in model.Songs)
         {
-            song.LikesCount = await _unit.LikesRepository.CountAsync(l => song.Id == l.SongId);
+            song.LikesCount = await _unit.LikesRepository.CountAsync(l => song.Id == l.SongId, cancellationToken);
         }
 
         return new Response<CollectionDetails>(model);

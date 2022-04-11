@@ -14,5 +14,5 @@ public interface IUnitOfWork
     public SignInManager<User> SignInManager { get; }
     public UserManager<User> UserManager { get; }
     public RoleManager<Role> RoleManager { get; }
-    Task SaveChangesAsync();
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

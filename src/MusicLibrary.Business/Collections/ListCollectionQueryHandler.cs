@@ -26,8 +26,8 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
             c.SongsCollectionType.Name.Equals(request.CollectionType);
         
         var collections = 
-            await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(predicate, request.PageNumber, request.PageSize);
-        var totalCount = await _unit.SongsCollectionsRepository.CountAsync(predicate);
+            await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
+        var totalCount = await _unit.SongsCollectionsRepository.CountAsync(predicate, cancellationToken);
 
         return new PagedQueryResponse<CollectionItem>(_mapper.Map<IEnumerable<CollectionItem>>(collections).ToArray())
         {
