@@ -1,4 +1,4 @@
-﻿namespace MusicLibrary.Domain;
+﻿namespace MusicLibrary.Domain.Entities.Songs;
 
 public class SongInfo
 {

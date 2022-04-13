@@ -1,4 +1,6 @@
-﻿namespace MusicLibrary.Domain;
+﻿using MusicLibrary.Domain.Common;
+
+namespace MusicLibrary.Domain.Entities.Songs;
 
 public class AuthorItem : BaseEntity
 {
