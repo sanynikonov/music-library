@@ -8,8 +8,8 @@ public class SongInfo
 
     public SongInfo(string title, string audioPath, int albumId)
     {
-        Title = title;
-        AudioPath = audioPath;
-        AlbumId = albumId;
+        Title = title!;
+        AudioPath = audioPath!;
+        AlbumId = albumId!;
     }
 }

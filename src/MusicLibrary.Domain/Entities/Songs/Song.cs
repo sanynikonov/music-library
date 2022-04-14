@@ -17,11 +17,11 @@ namespace MusicLibrary.Domain.Entities.Songs
         protected Song() {}
         public Song(SongInfo info, List<AuthorItem> authors, List<Like> likes)
         {
-            Title = info.Title;
+            Title = info!.Title;
             AudioPath = info.AudioPath;
             AlbumId = info.AlbumId;
-            _authors = authors;
-            _likes = likes;
+            _authors = authors!;
+            _likes = likes!;
         }
 
         public void Like(int userId)

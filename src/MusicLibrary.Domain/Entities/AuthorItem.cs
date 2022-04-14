@@ -1,6 +1,6 @@
 ﻿using MusicLibrary.Domain.Common;
 
-namespace MusicLibrary.Domain.Entities.Songs;
+namespace MusicLibrary.Domain.Entities;
 
 public class AuthorItem : BaseEntity
 {
