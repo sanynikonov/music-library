@@ -5,17 +5,17 @@ namespace MusicLibrary.Domain.Entities.Songs
     public class Song : BaseEntity, IAggregateRoot
     {
         private readonly List<Like> _likes = new();
-        private readonly List<AuthorItem> _authors = new();
+        private readonly List<ArtistItem> _artists = new();
 
         public SongInfo Info { get; private set; }
         public IReadOnlyList<Like> Likes => _likes.AsReadOnly();
-        public IReadOnlyList<AuthorItem> Authors => _authors.AsReadOnly();
+        public IReadOnlyList<ArtistItem> Artists => _artists.AsReadOnly();
 
         protected Song() {}
-        public Song(SongInfo info, List<AuthorItem> authors, List<Like> likes)
+        public Song(SongInfo info, List<ArtistItem> artists, List<Like> likes)
         {
             Info = info!;
-            _authors = authors!;
+            _artists = artists!;
             _likes = likes!;
         }
 

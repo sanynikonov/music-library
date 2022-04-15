@@ -2,11 +2,11 @@
 
 namespace MusicLibrary.Domain.Entities;
 
-public class AuthorItem : BaseEntity, IAggregateRoot
+public class ArtistItem : BaseEntity, IAggregateRoot
 {
     public string Name { get; private set; }
 
-    public AuthorItem(string name)
+    public ArtistItem(string name)
     {
         Name = name;
     }
