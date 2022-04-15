@@ -7,19 +7,14 @@ namespace MusicLibrary.Domain.Entities.Songs
         private readonly List<Like> _likes = new();
         private readonly List<AuthorItem> _authors = new();
 
-        public string Title { get; private set; }
-        public string AudioPath { get; private set; }
-        public int AlbumId { get; private set; }
-
+        public SongInfo Info { get; private set; }
         public IReadOnlyList<Like> Likes => _likes.AsReadOnly();
         public IReadOnlyList<AuthorItem> Authors => _authors.AsReadOnly();
 
         protected Song() {}
         public Song(SongInfo info, List<AuthorItem> authors, List<Like> likes)
         {
-            Title = info!.Title;
-            AudioPath = info.AudioPath;
-            AlbumId = info.AlbumId;
+            Info = info!;
             _authors = authors!;
             _likes = likes!;
         }
