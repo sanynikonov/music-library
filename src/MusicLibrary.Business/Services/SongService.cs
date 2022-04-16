@@ -24,11 +24,11 @@ public class SongService : ISongService
             var songId = song.Id;
             models.Add(new SongModel
             {
-                Name = song.Title,
+                Title = song.Title,
                 Id = song.Id,
-                AlbumId = song.ReleaseId,
+                ReleaseId = song.ReleaseId,
                 AudioPath = song.AudioPath,
-                Authors = song.Artists.Select(a => new AuthorItem
+                Artists = song.Artists.Select(a => new ArtistItem
                 {
                     Id = a.Id,
                     Name = a.Name
@@ -44,10 +44,10 @@ public class SongService : ISongService
     {
         var song = new Song
         {
-            Title = model.Name,
-            ReleaseId = model.AlbumId,
+            Title = model.Title,
+            ReleaseId = model.ReleaseId,
             AudioPath = model.AudioPath,
-            Artists = model.Authors.Select(a => new Data.Entities.Artist {Name = a.Name}).ToArray()
+            Artists = model.Artists.Select(a => new Data.Entities.Artist {Name = a.Name}).ToArray()
         };
 
         await _unit.SongsRepository.AddAsync(song);

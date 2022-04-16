@@ -18,9 +18,9 @@ public class SongsCollectionService : ISongsCollectionService
     {
         var collection = new Collection
         {
-            Title = details.Name,
+            Title = details.Title,
             Year = details.Year,
-            //Artists = details.Authors.Select(a => new Artist {Name = a.Name}).ToArray()
+            //Artists = details.Artists.Select(a => new Artist {Title = a.Title}).ToArray()
         };
 
         await _unit.SongsCollectionsRepository.AddAsync(collection);

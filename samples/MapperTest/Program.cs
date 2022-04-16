@@ -27,5 +27,5 @@ var author = new Artist
     }
 };
 
-var model = mapper.Map<AuthorModel>(author);
+var model = mapper.Map<ArtistDetails>(author);
 Console.WriteLine();

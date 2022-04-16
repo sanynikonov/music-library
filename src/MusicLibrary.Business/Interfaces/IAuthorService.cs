@@ -4,5 +4,5 @@ namespace MusicLibrary.Business.Interfaces;
 
 public interface IAuthorService
 {
-    Task<AuthorModel> GetAuthorAsync(int id);
+    Task<ArtistDetails> GetAuthorAsync(int id);
 }

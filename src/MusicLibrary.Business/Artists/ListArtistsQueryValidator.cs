@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace MusicLibrary.Business.Authors;
+namespace MusicLibrary.Business.Artists;
 
-public class ListAuthorsQueryValidator : AbstractValidator<ListAuthorsQuery>
+public class ListArtistsQueryValidator : AbstractValidator<ListArtistsQuery>
 {
-    public ListAuthorsQueryValidator()
+    public ListArtistsQueryValidator()
     {
         RuleFor(q => q.PageSize)
             .GreaterThan(0)

@@ -13,19 +13,19 @@ public class AuthorService : IAuthorService
         _unit = unit;
     }
 
-    public async Task<AuthorModel> GetAuthorAsync(int id)
+    public async Task<ArtistDetails> GetAuthorAsync(int id)
     {
         var author = await _unit.AuthorsRepository.GetAuthorWithAlbumsAsync(id);
-        return new AuthorModel
+        return new ArtistDetails
         {
             Id = author.Id,
             Name = author.Name,
             Albums = author.Releases.Select(a => new CollectionItem
             {
                 Id = a.Id,
-                Name = a.Title,
+                Title = a.Title,
                 Year = a.Year.Value,
-                CollectionType = a.Type.ToString()
+                Type = a.Type.ToString()
             }).ToArray()
         };
     }

@@ -2,9 +2,9 @@
 using MusicLibrary.Business.Core.Responses;
 using MusicLibrary.Business.Models;
 
-namespace MusicLibrary.Business.Authors;
+namespace MusicLibrary.Business.Artists;
 
-public class ListAuthorsQuery : IRequest<PagedQueryResponse<AuthorItem>>
+public class ListArtistsQuery : IRequest<PagedQueryResponse<ArtistItem>>
 {
     public string SearchString { get; set; }
     public int PageSize { get; set; } = 20;
