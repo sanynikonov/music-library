@@ -2,13 +2,14 @@
 
 public class Song : IBaseEntity
 {
-    public string Name { get; set; }
-    public string AudioPath { get; set; }
-    public int AlbumId { get; set; }
-
-    public SongsCollection Album { get; set; }
-    public ICollection<Author> Authors { get; set; } = new List<Author>();
-    public ICollection<SongsCollection> Playlists { get; set; } = new List<SongsCollection>();
-    public ICollection<Like> Likes { get; set; } = new List<Like>();
     public int Id { get; set; }
+    public string Title { get; set; }
+    public string AudioPath { get; set; }
+
+    public int ReleaseId { get; set; }
+    public Collection Release { get; set; }
+    public ICollection<Like> Likes { get; set; } = new List<Like>();
+    public ICollection<Artist> Artists { get; set; } = new List<Artist>();
+
+    public ICollection<Collection> Playlists { get; set; } = new List<Collection>();
 }

@@ -11,34 +11,33 @@ public class MusicLibraryContext : IdentityDbContext<User, Role, int>
         //Database.EnsureCreated();
     }
 
-    public DbSet<Author> Authors { get; set; }
+    public DbSet<Artist> Artists { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Song> Songs { get; set; }
-    public DbSet<SongsCollection> SongsCollections { get; set; }
-    public DbSet<SongsCollectionType> SongsCollectionTypes { get; set; }
+    public DbSet<Collection> Collections { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Author>()
-            .HasMany(p => p.Albums)
-            .WithMany(p => p.Authors);
+        builder.Entity<Artist>()
+            .HasMany(p => p.Releases)
+            .WithOne(p => p.Artist);
 
         builder.Entity<Song>()
-            .HasOne(p => p.Album)
+            .HasOne(p => p.Release)
             .WithMany(p => p.Songs);
 
         builder.Entity<Song>()
-            .HasMany(p => p.Authors)
+            .HasMany(p => p.Artists)
             .WithMany(p => p.Songs);
 
         builder.Entity<Song>()
             .HasMany(p => p.Playlists)
             .WithMany(p => p.PlaylistSongs)
             .UsingEntity<Dictionary<string, object>>(
-                "SongSongsCollection",
-                j => j.HasOne<SongsCollection>().WithMany().OnDelete(DeleteBehavior.Cascade),
+                "PlaylistSongs",
+                j => j.HasOne<Collection>().WithMany().OnDelete(DeleteBehavior.Cascade),
                 j => j.HasOne<Song>().WithMany().OnDelete(DeleteBehavior.ClientCascade));
 
         builder.Entity<Song>()
@@ -50,20 +49,16 @@ public class MusicLibraryContext : IdentityDbContext<User, Role, int>
             .HasMany(p => p.LikedSongs)
             .WithOne(p => p.User);
 
-        builder.Entity<SongsCollection>()
+        builder.Entity<Collection>()
             .HasMany(p => p.Users)
             .WithMany(p => p.SavedPlaylists)
             .UsingEntity<Dictionary<string, object>>(
                 "SongsCollectionUser",
                 j => j.HasOne<User>().WithMany().OnDelete(DeleteBehavior.Cascade),
-                j => j.HasOne<SongsCollection>().WithMany().OnDelete(DeleteBehavior.ClientCascade));
+                j => j.HasOne<Collection>().WithMany().OnDelete(DeleteBehavior.ClientCascade));
 
-        builder.Entity<SongsCollection>()
-            .HasOne(p => p.UserAuthor)
+        builder.Entity<Collection>()
+            .HasOne(p => p.User)
             .WithMany(p => p.Playlists);
-
-        builder.Entity<SongsCollection>()
-            .HasOne(p => p.SongsCollectionType)
-            .WithMany(p => p.SongsCollections);
     }
 }

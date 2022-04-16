@@ -14,7 +14,6 @@ public class UnitOfWork : IUnitOfWork
     private IAuthorRepository _authorsRepository;
     private IRepository<Like> _likesRepository;
     private ISongsCollectionRepository _songsCollectionsRepository;
-    private IRepository<SongsCollectionType> _songsCollectionTypesRepository;
     private ISongRepository _songsRepository;
     private RoleManager<Role> _roleManager;
     private SignInManager<User> _signInManager;
@@ -30,9 +29,6 @@ public class UnitOfWork : IUnitOfWork
 
     public ISongsCollectionRepository SongsCollectionsRepository =>
         _songsCollectionsRepository ??= new SongsCollectionRepository(_context);
-
-    public IRepository<SongsCollectionType> SongsCollectionTypesRepository =>
-        _songsCollectionTypesRepository ??= new EfRepository<SongsCollectionType>(_context);
 
     public IRepository<Like> LikesRepository => _likesRepository ??= new EfRepository<Like>(_context);
 

@@ -8,21 +8,21 @@ using MusicLibrary.Data.Entities;
 Console.WriteLine("Hello, World!");
 var mapper = new Mapper(new MapperConfiguration(opt => opt.AddProfile<MapperProfile>()));
 
-var author = new Author
+var author = new Artist
 {
     Id = 1,
-    Name = "Author",
-    Albums = new SongsCollection[]
+    Name = "Artist",
+    Releases = new Collection[]
     {
         new()
         {
-            Id = 1, Name = "Collection 1", SongsCollectionTypeId = 1, Year = 2010, UserAuthorId = 1,
-            SongsCollectionType = new SongsCollectionType {Name = "Album"}
+            Id = 1, Title = "Collection 1", Year = 2010, UserId = 1,
+            Type = ReleaseType.LongPlay
         },
         new()
         {
-            Id = 2, Name = "Collection 2", SongsCollectionTypeId = 1, Year = 2012, UserAuthorId = 1,
-            SongsCollectionType = new SongsCollectionType {Name = "Album"}
+            Id = 2, Title = "Collection 2", Year = 2012, UserId = 1,
+            Type = ReleaseType.LongPlay
         }
     }
 };

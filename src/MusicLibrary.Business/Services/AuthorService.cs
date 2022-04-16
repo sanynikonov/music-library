@@ -20,12 +20,12 @@ public class AuthorService : IAuthorService
         {
             Id = author.Id,
             Name = author.Name,
-            Albums = author.Albums.Select(a => new CollectionItem
+            Albums = author.Releases.Select(a => new CollectionItem
             {
                 Id = a.Id,
-                Name = a.Name,
-                Year = a.Year,
-                CollectionType = a.SongsCollectionType.Name
+                Name = a.Title,
+                Year = a.Year.Value,
+                CollectionType = a.Type.ToString()
             }).ToArray()
         };
     }

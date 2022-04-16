@@ -21,12 +21,12 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
 
     public async Task<PagedQueryResponse<CollectionItem>> Handle(ListCollectionQuery request, CancellationToken cancellationToken)
     {
-        Expression<Func<SongsCollection, bool>> predicate = c =>
-            c.Name.Contains(request.SearchString) && 
-            c.SongsCollectionType.Name.Equals(request.CollectionType);
+        Expression<Func<Collection, bool>> predicate = c =>
+            c.Title.Contains(request.SearchString) && 
+            c.Type.ToString().Equals(request.CollectionType);
         
         var collections = 
-            await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
+            await _unit.SongsCollectionsRepository.GetAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
         var totalCount = await _unit.SongsCollectionsRepository.CountAsync(predicate, cancellationToken);
 
         return new PagedQueryResponse<CollectionItem>(_mapper.Map<IEnumerable<CollectionItem>>(collections).ToArray())

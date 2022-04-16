@@ -4,17 +4,17 @@ using MusicLibrary.Data.Interfaces;
 
 namespace MusicLibrary.Data.Repositories;
 
-public class AuthorRepository : EfRepository<Author>, IAuthorRepository
+public class AuthorRepository : EfRepository<Artist>, IAuthorRepository
 {
     public AuthorRepository(MusicLibraryContext dbContext) : base(dbContext)
     {
     }
 
-    public async Task<Author> GetAuthorWithAlbumsAsync(int id, CancellationToken cancellationToken)
+    public async Task<Artist> GetAuthorWithAlbumsAsync(int id, CancellationToken cancellationToken)
     {
-        return await DbContext.Authors
-            .Include(p => p.Albums)
-            .ThenInclude(p => p.SongsCollectionType)
+        return await DbContext.Artists
+            .Include(p => p.Releases)
+            .ThenInclude(p => p.Type)
             .SingleOrDefaultAsync(a => a.Id == id, cancellationToken);
     }
 }

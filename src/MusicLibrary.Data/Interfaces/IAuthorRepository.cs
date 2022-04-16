@@ -2,7 +2,7 @@
 
 namespace MusicLibrary.Data.Interfaces;
 
-public interface IAuthorRepository : IRepository<Author>
+public interface IAuthorRepository : IRepository<Artist>
 {
-    Task<Author> GetAuthorWithAlbumsAsync(int id, CancellationToken cancellationToken = default);
+    Task<Artist> GetAuthorWithAlbumsAsync(int id, CancellationToken cancellationToken = default);
 }

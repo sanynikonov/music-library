@@ -20,7 +20,7 @@ public class ListAuthorsQueryHandler : IRequestHandler<ListAuthorsQuery, PagedQu
 
     public async Task<PagedQueryResponse<AuthorItem>> Handle(ListAuthorsQuery request, CancellationToken cancellationToken)
     {
-        Expression<Func<Data.Entities.Author, bool>> predicate = a => a.Name.Contains(request.SearchString);
+        Expression<Func<Data.Entities.Artist, bool>> predicate = a => a.Name.Contains(request.SearchString);
 
         var authors = await _unit.AuthorsRepository.GetAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
         var totalCount = await _unit.AuthorsRepository.CountAsync(predicate, cancellationToken);

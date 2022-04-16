@@ -23,7 +23,7 @@ public class UserService : IUserService
         if (user == null)
             return null;
 
-        var playlists = await _unit.SongsCollectionsRepository.GetAllWithTypesAsync(c => c.UserAuthorId == userId);
+        var playlists = await _unit.SongsCollectionsRepository.GetAsync(c => c.UserId == userId);
         user.Playlists = playlists.ToArray();
         return _mapper.Map<UserPlaylistsModel>(user);
     }

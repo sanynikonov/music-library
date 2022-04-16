@@ -16,7 +16,7 @@ public class SongService : ISongService
 
     public async Task<IEnumerable<SongModel>> GetAllSongsAsync(SearchFilterModel filter)
     {
-        var songs = await _unit.SongsRepository.GetAllSongsWithAuthorsAsync(s => s.Name.Contains(filter.SearchString),
+        var songs = await _unit.SongsRepository.GetAllSongsWithAuthorsAsync(s => s.Title.Contains(filter.SearchString),
             filter.PageNumber, filter.PageSize);
         var models = new List<SongModel>();
         foreach (var song in songs)
@@ -24,11 +24,11 @@ public class SongService : ISongService
             var songId = song.Id;
             models.Add(new SongModel
             {
-                Name = song.Name,
+                Name = song.Title,
                 Id = song.Id,
-                AlbumId = song.AlbumId,
+                AlbumId = song.ReleaseId,
                 AudioPath = song.AudioPath,
-                Authors = song.Authors.Select(a => new AuthorItem
+                Authors = song.Artists.Select(a => new AuthorItem
                 {
                     Id = a.Id,
                     Name = a.Name
@@ -44,10 +44,10 @@ public class SongService : ISongService
     {
         var song = new Song
         {
-            Name = model.Name,
-            AlbumId = model.AlbumId,
+            Title = model.Name,
+            ReleaseId = model.AlbumId,
             AudioPath = model.AudioPath,
-            Authors = model.Authors.Select(a => new Data.Entities.Author {Name = a.Name}).ToArray()
+            Artists = model.Authors.Select(a => new Data.Entities.Artist {Name = a.Name}).ToArray()
         };
 
         await _unit.SongsRepository.AddAsync(song);
@@ -58,7 +58,7 @@ public class SongService : ISongService
 
     public async Task AddToPlaylistAsync(int songId, int playlistId)
     {
-        var playlist = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(playlistId);
+        var playlist = await _unit.SongsCollectionsRepository.GetWithArtistsAndSongsAsync(playlistId);
         var song = await _unit.SongsRepository.GetAsync(songId);
         playlist.Songs.Add(song);
 

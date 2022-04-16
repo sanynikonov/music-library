@@ -8,7 +8,6 @@ public interface IUnitOfWork
 {
     public ISongRepository SongsRepository { get; }
     public ISongsCollectionRepository SongsCollectionsRepository { get; }
-    public IRepository<SongsCollectionType> SongsCollectionTypesRepository { get; }
     public IRepository<Like> LikesRepository { get; }
     public IAuthorRepository AuthorsRepository { get; }
     public SignInManager<User> SignInManager { get; }

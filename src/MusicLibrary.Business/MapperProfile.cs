@@ -11,10 +11,9 @@ public class MapperProfile : Profile
 {
     public MapperProfile()
     {
-        CreateMap<Data.Entities.Author, AuthorModel>()
-            //.ForMember(x => x.Albums, c => c.MapFrom(x => x.Albums))
+        CreateMap<Data.Entities.Artist, AuthorModel>()
             .ReverseMap();
-        CreateMap<Data.Entities.Author, AuthorItem>()
+        CreateMap<Data.Entities.Artist, AuthorItem>()
             .ReverseMap();
         CreateMap<User, UserProfileModel>()
             .ReverseMap();
@@ -22,12 +21,12 @@ public class MapperProfile : Profile
             .ReverseMap();
         CreateMap<Song, SongModel>()
             .ReverseMap();
-        CreateMap<SongsCollection, CollectionDetails>()
+        CreateMap<Collection, CollectionDetails>()
             .ReverseMap();
-        CreateMap<SongsCollection, CollectionItem>()
+        CreateMap<Collection, CollectionItem>()
             .ReverseMap();
-        CreateMap<SongsCollectionType, string>()
-            .ConvertUsing(t => t.Name);
+        CreateMap<ReleaseType, string>()
+            .ConvertUsing(t => t.ToString());
 
         CreateMap<CollectionSearchFilterModel, ListCollectionQuery>();
         CreateMap<SearchFilterModel, ListAuthorsQuery>();

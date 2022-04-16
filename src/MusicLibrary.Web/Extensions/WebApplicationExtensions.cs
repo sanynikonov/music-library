@@ -31,7 +31,7 @@ public static class WebApplicationExtensions
             };
             var author = new User
             {
-                Email = "author@ukr.net", UserName = "author", Name = "Test Author", Bio = "Test Author",
+                Email = "author@ukr.net", UserName = "author", Name = "Test Artist", Bio = "Test Artist",
                 ProfilePicturePath = ""
             };
             var user = new User

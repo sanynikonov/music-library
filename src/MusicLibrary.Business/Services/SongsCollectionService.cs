@@ -16,15 +16,11 @@ public class SongsCollectionService : ISongsCollectionService
     
     public async Task<int> AddAsync(CollectionDetails details)
     {
-        //var names = model.Authors.Select(a => a.Name).ToArray();
-        //var authors = await _unit.AuthorsRepository.GetAsync(a => names.Contains(a.Name));
-        //var existingAuthorsIds = authors.Select(a => a.Id).ToArray();
-        //var newAuthors = model.Authors.Where(a => existingAuthorsIds.Contains(a.Id)).Select();
-        var collection = new SongsCollection
+        var collection = new Collection
         {
-            Name = details.Name,
+            Title = details.Name,
             Year = details.Year,
-            Authors = details.Authors.Select(a => new Author {Name = a.Name}).ToArray()
+            //Artists = details.Authors.Select(a => new Artist {Name = a.Name}).ToArray()
         };
 
         await _unit.SongsCollectionsRepository.AddAsync(collection);
@@ -35,7 +31,7 @@ public class SongsCollectionService : ISongsCollectionService
 
     public async Task LikeAsync(int collectionId, int userId)
     {
-        var collection = await _unit.SongsCollectionsRepository.GetWithAuthorsAndSongsAndTypesAsync(userId);
+        var collection = await _unit.SongsCollectionsRepository.GetWithArtistsAndSongsAsync(userId);
         var songsIds = collection.Songs.Select(x => x.Id).ToArray();
         var likes = await _unit.LikesRepository.GetAsync(l => l.UserId == userId && songsIds.Contains(l.SongId));
         var unlikedSongs = songsIds.Except(likes.Select(x => x.SongId)).ToArray();

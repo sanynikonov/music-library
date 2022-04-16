@@ -8,7 +8,7 @@ public class User : IdentityUser<int>, IBaseEntity
     public string Bio { get; set; }
     public string ProfilePicturePath { get; set; }
 
-    public ICollection<SongsCollection> Playlists { get; set; } = new List<SongsCollection>();
-    public ICollection<SongsCollection> SavedPlaylists { get; set; } = new List<SongsCollection>();
+    public ICollection<Collection> Playlists { get; set; } = new List<Collection>();
+    public ICollection<Collection> SavedPlaylists { get; set; } = new List<Collection>();
     public ICollection<Like> LikedSongs { get; set; } = new List<Like>();
 }

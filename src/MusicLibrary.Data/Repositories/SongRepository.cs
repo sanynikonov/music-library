@@ -22,7 +22,7 @@ public class SongRepository : EfRepository<Song>, ISongRepository
             query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
 
         return await query
-            .Include(p => p.Authors)
+            .Include(p => p.Artists)
             .ToArrayAsync(cancellationToken);
     }
 }
