@@ -53,7 +53,7 @@ public class MusicLibraryContext : IdentityDbContext<User, Role, int>
             .HasMany(p => p.Users)
             .WithMany(p => p.SavedPlaylists)
             .UsingEntity<Dictionary<string, object>>(
-                "SongsCollectionUser",
+                "UserPlaylists",
                 j => j.HasOne<User>().WithMany().OnDelete(DeleteBehavior.Cascade),
                 j => j.HasOne<Collection>().WithMany().OnDelete(DeleteBehavior.ClientCascade));
 

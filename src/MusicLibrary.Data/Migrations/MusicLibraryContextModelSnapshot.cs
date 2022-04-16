@@ -22,34 +22,19 @@ namespace MusicLibrary.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AuthorSong", b =>
+            modelBuilder.Entity("ArtistSong", b =>
                 {
-                    b.Property<int>("AuthorsId")
+                    b.Property<int>("ArtistsId")
                         .HasColumnType("int");
 
                     b.Property<int>("SongsId")
                         .HasColumnType("int");
 
-                    b.HasKey("AuthorsId", "SongsId");
+                    b.HasKey("ArtistsId", "SongsId");
 
                     b.HasIndex("SongsId");
 
-                    b.ToTable("AuthorSong");
-                });
-
-            modelBuilder.Entity("AuthorSongsCollection", b =>
-                {
-                    b.Property<int>("AlbumsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AuthorsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlbumsId", "AuthorsId");
-
-                    b.HasIndex("AuthorsId");
-
-                    b.ToTable("AuthorSongsCollection");
+                    b.ToTable("ArtistSong");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -155,7 +140,7 @@ namespace MusicLibrary.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Author", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Artist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,15 +149,46 @@ namespace MusicLibrary.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Like", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Collection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Collections");
+                });
+
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Like", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +211,7 @@ namespace MusicLibrary.Data.Migrations
                     b.ToTable("Likes");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Role", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,7 +241,7 @@ namespace MusicLibrary.Data.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Song", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Song", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -233,72 +249,23 @@ namespace MusicLibrary.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AlbumId")
-                        .HasColumnType("int");
-
                     b.Property<string>("AudioPath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<int>("ReleaseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlbumId");
+                    b.HasIndex("ReleaseId");
 
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.SongsCollection", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SongsCollectionTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserAuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SongsCollectionTypeId");
-
-                    b.HasIndex("UserAuthorId");
-
-                    b.ToTable("SongsCollections");
-                });
-
-            modelBuilder.Entity("MusicLibrary.Data.SongsCollectionType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SongsCollectionTypes");
-                });
-
-            modelBuilder.Entity("MusicLibrary.Data.User", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -310,7 +277,6 @@ namespace MusicLibrary.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -331,7 +297,6 @@ namespace MusicLibrary.Data.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -352,7 +317,6 @@ namespace MusicLibrary.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePicturePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -378,22 +342,7 @@ namespace MusicLibrary.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("SongsCollectionUser", b =>
-                {
-                    b.Property<int>("SavedPlaylistsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SavedPlaylistsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("SongsCollectionUser");
-                });
-
-            modelBuilder.Entity("SongSongsCollection", b =>
+            modelBuilder.Entity("PlaylistSongs", b =>
                 {
                     b.Property<int>("PlaylistSongsId")
                         .HasColumnType("int");
@@ -405,42 +354,42 @@ namespace MusicLibrary.Data.Migrations
 
                     b.HasIndex("PlaylistsId");
 
-                    b.ToTable("SongSongsCollection");
+                    b.ToTable("PlaylistSongs");
                 });
 
-            modelBuilder.Entity("AuthorSong", b =>
+            modelBuilder.Entity("UserPlaylists", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.Author", null)
+                    b.Property<int>("SavedPlaylistsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SavedPlaylistsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("UserPlaylists");
+                });
+
+            modelBuilder.Entity("ArtistSong", b =>
+                {
+                    b.HasOne("MusicLibrary.Data.Entities.Artist", null)
                         .WithMany()
-                        .HasForeignKey("AuthorsId")
+                        .HasForeignKey("ArtistsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MusicLibrary.Data.Song", null)
+                    b.HasOne("MusicLibrary.Data.Entities.Song", null)
                         .WithMany()
                         .HasForeignKey("SongsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AuthorSongsCollection", b =>
-                {
-                    b.HasOne("MusicLibrary.Data.SongsCollection", null)
-                        .WithMany()
-                        .HasForeignKey("AlbumsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MusicLibrary.Data.Author", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.Role", null)
+                    b.HasOne("MusicLibrary.Data.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -449,7 +398,7 @@ namespace MusicLibrary.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.User", null)
+                    b.HasOne("MusicLibrary.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -458,7 +407,7 @@ namespace MusicLibrary.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.User", null)
+                    b.HasOne("MusicLibrary.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -467,13 +416,13 @@ namespace MusicLibrary.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.Role", null)
+                    b.HasOne("MusicLibrary.Data.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MusicLibrary.Data.User", null)
+                    b.HasOne("MusicLibrary.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -482,22 +431,39 @@ namespace MusicLibrary.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.User", null)
+                    b.HasOne("MusicLibrary.Data.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Like", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Collection", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.Song", "Song")
+                    b.HasOne("MusicLibrary.Data.Entities.Artist", "Artist")
+                        .WithMany("Releases")
+                        .HasForeignKey("ArtistId");
+
+                    b.HasOne("MusicLibrary.Data.Entities.User", "User")
+                        .WithMany("Playlists")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Like", b =>
+                {
+                    b.HasOne("MusicLibrary.Data.Entities.Song", "Song")
                         .WithMany("Likes")
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
-                    b.HasOne("MusicLibrary.Data.User", "User")
+                    b.HasOne("MusicLibrary.Data.Entities.User", "User")
                         .WithMany("LikedSongs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -508,82 +474,63 @@ namespace MusicLibrary.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Song", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Song", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.SongsCollection", "Album")
+                    b.HasOne("MusicLibrary.Data.Entities.Collection", "Release")
                         .WithMany("Songs")
-                        .HasForeignKey("AlbumId")
+                        .HasForeignKey("ReleaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Album");
+                    b.Navigation("Release");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.SongsCollection", b =>
+            modelBuilder.Entity("PlaylistSongs", b =>
                 {
-                    b.HasOne("MusicLibrary.Data.SongsCollectionType", "SongsCollectionType")
-                        .WithMany("SongsCollections")
-                        .HasForeignKey("SongsCollectionTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MusicLibrary.Data.User", "UserAuthor")
-                        .WithMany("Playlists")
-                        .HasForeignKey("UserAuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SongsCollectionType");
-
-                    b.Navigation("UserAuthor");
-                });
-
-            modelBuilder.Entity("SongsCollectionUser", b =>
-                {
-                    b.HasOne("MusicLibrary.Data.SongsCollection", null)
-                        .WithMany()
-                        .HasForeignKey("SavedPlaylistsId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("MusicLibrary.Data.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SongSongsCollection", b =>
-                {
-                    b.HasOne("MusicLibrary.Data.Song", null)
+                    b.HasOne("MusicLibrary.Data.Entities.Song", null)
                         .WithMany()
                         .HasForeignKey("PlaylistSongsId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
-                    b.HasOne("MusicLibrary.Data.SongsCollection", null)
+                    b.HasOne("MusicLibrary.Data.Entities.Collection", null)
                         .WithMany()
                         .HasForeignKey("PlaylistsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.Song", b =>
+            modelBuilder.Entity("UserPlaylists", b =>
                 {
-                    b.Navigation("Likes");
+                    b.HasOne("MusicLibrary.Data.Entities.Collection", null)
+                        .WithMany()
+                        .HasForeignKey("SavedPlaylistsId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicLibrary.Data.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.SongsCollection", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Artist", b =>
+                {
+                    b.Navigation("Releases");
+                });
+
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Collection", b =>
                 {
                     b.Navigation("Songs");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.SongsCollectionType", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.Song", b =>
                 {
-                    b.Navigation("SongsCollections");
+                    b.Navigation("Likes");
                 });
 
-            modelBuilder.Entity("MusicLibrary.Data.User", b =>
+            modelBuilder.Entity("MusicLibrary.Data.Entities.User", b =>
                 {
                     b.Navigation("LikedSongs");
 
