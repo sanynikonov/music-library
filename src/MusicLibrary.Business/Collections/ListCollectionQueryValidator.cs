@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MusicLibrary.Data.Entities;
 
 namespace MusicLibrary.Business.Collections;
 
@@ -18,8 +19,11 @@ public class ListCollectionQueryValidator : AbstractValidator<ListCollectionQuer
             .NotEmpty()
             .WithMessage("Search string must not be empty");
 
-        RuleFor(q => q.CollectionType)
-            .NotEmpty()
-            .WithMessage("Collection type must not be empty");
+        When(q => q.ReleaseType != null, () =>
+        {
+            RuleFor(q => q.ReleaseType)
+                .IsEnumName(typeof(ReleaseType), caseSensitive: false)
+                .WithMessage("Release type must one of: 'LongPlay', 'ExtendedPlay', 'Single', 'Compilation'");
+        });
     }
 }

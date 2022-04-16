@@ -9,5 +9,5 @@ public class SearchFilterModel
 
 public class CollectionSearchFilterModel : SearchFilterModel
 {
-    public string CollectionType { get; set; }
+    public string ReleaseType { get; set; }
 }

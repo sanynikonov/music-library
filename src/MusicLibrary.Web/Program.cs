@@ -1,4 +1,3 @@
-using System.Reflection;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +37,7 @@ builder.Services
     .AddScoped<ICollectionRepository, CollectionRepository>()
     .AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(ListCollectionQueryValidator));
-builder.Services.AddMediatR(Assembly.GetAssembly(typeof(ListCollectionQuery)))
+builder.Services.AddMediatR(typeof(ListCollectionQuery).Assembly)
     .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 

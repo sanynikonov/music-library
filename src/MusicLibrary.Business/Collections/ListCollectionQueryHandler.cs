@@ -21,9 +21,9 @@ public class ListCollectionQueryHandler : IRequestHandler<ListCollectionQuery, P
 
     public async Task<PagedQueryResponse<CollectionItem>> Handle(ListCollectionQuery request, CancellationToken cancellationToken)
     {
-        Expression<Func<Collection, bool>> predicate = c =>
-            c.Title.Contains(request.SearchString) && 
-            c.Type.ToString().Equals(request.CollectionType);
+        Expression<Func<Collection, bool>> predicate = Enum.TryParse<ReleaseType>(request.ReleaseType, out var releaseType)
+            ? c => c.Type == releaseType && c.Title.Contains(request.SearchString)
+            : c => c.Title.Contains(request.SearchString);
         
         var collections = 
             await _unit.CollectionsRepository.GetAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
