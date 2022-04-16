@@ -15,7 +15,7 @@ public class AuthorService : IAuthorService
 
     public async Task<ArtistDetails> GetAuthorAsync(int id)
     {
-        var author = await _unit.AuthorsRepository.GetAuthorWithAlbumsAsync(id);
+        var author = await _unit.ArtistsRepository.GetWithAlbumsAsync(id);
         return new ArtistDetails
         {
             Id = author.Id,

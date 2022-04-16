@@ -23,7 +23,7 @@ public class SongsCollectionService : ISongsCollectionService
             //Artists = details.Artists.Select(a => new Artist {Title = a.Title}).ToArray()
         };
 
-        await _unit.SongsCollectionsRepository.AddAsync(collection);
+        await _unit.CollectionsRepository.AddAsync(collection);
         await _unit.SaveChangesAsync();
 
         return collection.Id;
@@ -31,7 +31,7 @@ public class SongsCollectionService : ISongsCollectionService
 
     public async Task LikeAsync(int collectionId, int userId)
     {
-        var collection = await _unit.SongsCollectionsRepository.GetWithArtistsAndSongsAsync(userId);
+        var collection = await _unit.CollectionsRepository.GetWithArtistsAndSongsAsync(userId);
         var songsIds = collection.Songs.Select(x => x.Id).ToArray();
         var likes = await _unit.LikesRepository.GetAsync(l => l.UserId == userId && songsIds.Contains(l.SongId));
         var unlikedSongs = songsIds.Except(likes.Select(x => x.SongId)).ToArray();

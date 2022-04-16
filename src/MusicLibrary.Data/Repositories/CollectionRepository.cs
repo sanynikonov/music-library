@@ -5,9 +5,9 @@ using MusicLibrary.Data.Interfaces;
 
 namespace MusicLibrary.Data.Repositories;
 
-public class SongsCollectionRepository : EfRepository<Collection>, ISongsCollectionRepository
+public class CollectionRepository : EfRepository<Collection>, ICollectionRepository
 {
-    public SongsCollectionRepository(MusicLibraryContext dbContext) : base(dbContext)
+    public CollectionRepository(MusicLibraryContext dbContext) : base(dbContext)
     {
     }
 

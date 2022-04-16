@@ -22,8 +22,8 @@ public class ListArtistsQueryHandler : IRequestHandler<ListArtistsQuery, PagedQu
     {
         Expression<Func<Data.Entities.Artist, bool>> predicate = a => a.Name.Contains(request.SearchString);
 
-        var authors = await _unit.AuthorsRepository.GetAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
-        var totalCount = await _unit.AuthorsRepository.CountAsync(predicate, cancellationToken);
+        var authors = await _unit.ArtistsRepository.GetAsync(predicate, request.PageNumber, request.PageSize, cancellationToken);
+        var totalCount = await _unit.ArtistsRepository.CountAsync(predicate, cancellationToken);
 
         return new PagedQueryResponse<ArtistItem>(_mapper.Map<IEnumerable<ArtistItem>>(authors).ToArray())
         {

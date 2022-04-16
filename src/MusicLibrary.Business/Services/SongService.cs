@@ -58,11 +58,11 @@ public class SongService : ISongService
 
     public async Task AddToPlaylistAsync(int songId, int playlistId)
     {
-        var playlist = await _unit.SongsCollectionsRepository.GetWithArtistsAndSongsAsync(playlistId);
+        var playlist = await _unit.CollectionsRepository.GetWithArtistsAndSongsAsync(playlistId);
         var song = await _unit.SongsRepository.GetAsync(songId);
         playlist.Songs.Add(song);
 
-        await _unit.SongsCollectionsRepository.UpdateAsync(playlist);
+        await _unit.CollectionsRepository.UpdateAsync(playlist);
         await _unit.SaveChangesAsync();
     }
 

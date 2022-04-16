@@ -19,7 +19,7 @@ public class ListCollectionDetailsQueryHandler : IRequestHandler<ListCollectionD
 
     public async Task<Response<CollectionDetails>> Handle(ListCollectionDetailsQuery request, CancellationToken cancellationToken)
     {
-        var collection = await _unit.SongsCollectionsRepository.GetWithArtistsAndSongsAsync(request.CollectionId, cancellationToken);
+        var collection = await _unit.CollectionsRepository.GetWithArtistsAndSongsAsync(request.CollectionId, cancellationToken);
 
         if (collection is null)
         {

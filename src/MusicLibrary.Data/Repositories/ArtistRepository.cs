@@ -4,13 +4,13 @@ using MusicLibrary.Data.Interfaces;
 
 namespace MusicLibrary.Data.Repositories;
 
-public class AuthorRepository : EfRepository<Artist>, IAuthorRepository
+public class ArtistRepository : EfRepository<Artist>, IArtistRepository
 {
-    public AuthorRepository(MusicLibraryContext dbContext) : base(dbContext)
+    public ArtistRepository(MusicLibraryContext dbContext) : base(dbContext)
     {
     }
 
-    public async Task<Artist> GetAuthorWithAlbumsAsync(int id, CancellationToken cancellationToken)
+    public async Task<Artist> GetWithAlbumsAsync(int id, CancellationToken cancellationToken)
     {
         return await DbContext.Artists
             .Include(p => p.Releases)

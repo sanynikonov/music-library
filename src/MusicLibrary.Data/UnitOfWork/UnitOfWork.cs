@@ -11,9 +11,9 @@ public class UnitOfWork : IUnitOfWork
     private readonly MusicLibraryContext _context;
     private readonly IServiceProvider _serviceProvider;
 
-    private IAuthorRepository _authorsRepository;
+    private IArtistRepository _artistsRepository;
     private IRepository<Like> _likesRepository;
-    private ISongsCollectionRepository _songsCollectionsRepository;
+    private ICollectionRepository _collectionsRepository;
     private ISongRepository _songsRepository;
     private RoleManager<Role> _roleManager;
     private SignInManager<User> _signInManager;
@@ -27,12 +27,12 @@ public class UnitOfWork : IUnitOfWork
 
     public ISongRepository SongsRepository => _songsRepository ??= new SongRepository(_context);
 
-    public ISongsCollectionRepository SongsCollectionsRepository =>
-        _songsCollectionsRepository ??= new SongsCollectionRepository(_context);
+    public ICollectionRepository CollectionsRepository =>
+        _collectionsRepository ??= new CollectionRepository(_context);
 
     public IRepository<Like> LikesRepository => _likesRepository ??= new EfRepository<Like>(_context);
 
-    public IAuthorRepository AuthorsRepository => _authorsRepository ??= new AuthorRepository(_context);
+    public IArtistRepository ArtistsRepository => _artistsRepository ??= new ArtistRepository(_context);
 
     public SignInManager<User> SignInManager =>
         _signInManager ??= _serviceProvider.GetRequiredService<SignInManager<User>>();

@@ -34,8 +34,8 @@ builder.Services
     .AddScoped<ISongsCollectionService, SongsCollectionService>()
     .AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
     .AddScoped<ISongRepository, SongRepository>()
-    .AddScoped<IAuthorRepository, AuthorRepository>()
-    .AddScoped<ISongsCollectionRepository, SongsCollectionRepository>()
+    .AddScoped<IArtistRepository, ArtistRepository>()
+    .AddScoped<ICollectionRepository, CollectionRepository>()
     .AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(ListCollectionQueryValidator));
 builder.Services.AddMediatR(Assembly.GetAssembly(typeof(ListCollectionQuery)))
