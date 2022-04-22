@@ -1,4 +1,4 @@
-﻿namespace EfCoreInheritanceTest;
+﻿namespace EfCoreInheritanceTest.Entities;
 
 public class Playlist
 {

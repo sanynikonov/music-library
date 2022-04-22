@@ -1,4 +1,6 @@
-﻿namespace EfCoreInheritanceTest;
+﻿using EfCoreInheritanceTest.Entities;
+
+namespace EfCoreInheritanceTest.DataModel;
 
 public class ExtendedPlaylist : Playlist, INavigationPropertySynchronizer
 {

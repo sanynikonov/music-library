@@ -1,6 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using EfCoreInheritanceTest;
+using EfCoreInheritanceTest.DataAccess;
+using EfCoreInheritanceTest.DataModel;
+using EfCoreInheritanceTest.Entities;
 using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
