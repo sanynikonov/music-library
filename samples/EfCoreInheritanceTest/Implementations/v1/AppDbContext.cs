@@ -1,8 +1,7 @@
-﻿using EfCoreInheritanceTest.DataModel;
-using EfCoreInheritanceTest.Entities;
+﻿using EfCoreInheritanceTest.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EfCoreInheritanceTest.DataAccess;
+namespace EfCoreInheritanceTest.Implementations.v1;
 
 public class AppDbContext : DbContext
 {

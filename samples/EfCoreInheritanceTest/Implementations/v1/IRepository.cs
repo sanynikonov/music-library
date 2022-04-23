@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace EfCoreInheritanceTest.DataAccess;
+namespace EfCoreInheritanceTest.Implementations.v1;
 
 public interface IRepository<T>
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace EfCoreInheritanceTest.DataAccess;
+namespace EfCoreInheritanceTest.Implementations.v1;
 
 public class Factory : IDesignTimeDbContextFactory<AppDbContext>
 {

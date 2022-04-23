@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
-namespace EfCoreInheritanceTest.Expressions;
+namespace EfCoreInheritanceTest.Implementations.v1.Expressions;
 
 public class IncludesMapper<TSource, TTarget> : ExpressionVisitor
 {

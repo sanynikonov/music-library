@@ -1,6 +1,6 @@
 ﻿using EfCoreInheritanceTest.Entities;
 
-namespace EfCoreInheritanceTest.DataModel;
+namespace EfCoreInheritanceTest.Implementations.v1;
 
 public class ExtendedSong : Song
 {

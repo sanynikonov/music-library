@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using EfCoreInheritanceTest.DataModel;
-using EfCoreInheritanceTest.Expressions;
+using EfCoreInheritanceTest.Implementations.v1.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace EfCoreInheritanceTest.DataAccess;
+namespace EfCoreInheritanceTest.Implementations.v1;
 
 public class Repository<T, TExtended> : IRepository<T> where TExtended : class, T
 {
