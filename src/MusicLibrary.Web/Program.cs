@@ -36,8 +36,8 @@ builder.Services
     .AddScoped<IArtistRepository, ArtistRepository>()
     .AddScoped<ICollectionRepository, CollectionRepository>()
     .AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddValidatorsFromAssemblyContaining(typeof(ListCollectionQueryValidator));
-builder.Services.AddMediatR(typeof(ListCollectionQuery).Assembly)
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(CollectionQueryValidator));
+builder.Services.AddMediatR(typeof(CollectionQuery).Assembly)
     .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 

@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MusicLibrary.Business.Queries\MusicLibrary.Business.Queries.csproj" />
     <ProjectReference Include="..\MusicLibrary.Business\MusicLibrary.Business.csproj" />
   </ItemGroup>
 

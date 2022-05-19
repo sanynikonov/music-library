@@ -28,8 +28,8 @@ public class MapperProfile : Profile
         CreateMap<ReleaseType, string>()
             .ConvertUsing(t => t.ToString());
 
-        CreateMap<CollectionSearchFilterModel, ListCollectionQuery>();
-        CreateMap<SearchFilterModel, ListArtistsQuery>();
+        CreateMap<CollectionSearchFilterModel, CollectionQuery>();
+        CreateMap<SearchFilterModel, ArtistsQuery>();
 
         CreateMap(typeof(PagedQueryResponse<>), typeof(PagedResponse<>));
     }

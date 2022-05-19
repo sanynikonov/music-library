@@ -26,7 +26,7 @@ public class ArtistsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<PagedResponse<ArtistItem>>> GetAll([FromQuery] SearchFilterModel filter, CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(_mapper.Map<ListArtistsQuery>(filter), cancellationToken);
+        var response = await _mediator.Send(_mapper.Map<ArtistsQuery>(filter), cancellationToken);
         return response.ToActionResult(_mapper);
     }
 
