@@ -4,7 +4,7 @@ using MusicLibrary.Business.Models;
 
 namespace MusicLibrary.Business.Collections;
 
-public record ListCollectionQuery : IRequest<PagedQueryResponse<CollectionItem>>
+public record CollectionQuery : IRequest<PagedQueryResponse<CollectionItem>>
 {
     public string ReleaseType { get; set; }
     public string SearchString { get; set; }

@@ -4,7 +4,7 @@ using MusicLibrary.Business.Models;
 
 namespace MusicLibrary.Business.Artists;
 
-public class ListArtistsQuery : IRequest<PagedQueryResponse<ArtistItem>>
+public class ArtistsQuery : IRequest<PagedQueryResponse<ArtistItem>>
 {
     public string SearchString { get; set; }
     public int PageSize { get; set; } = 20;

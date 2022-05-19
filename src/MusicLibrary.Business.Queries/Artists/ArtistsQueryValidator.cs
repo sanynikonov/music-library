@@ -2,9 +2,9 @@
 
 namespace MusicLibrary.Business.Artists;
 
-public class ListArtistsQueryValidator : AbstractValidator<ListArtistsQuery>
+public class ArtistsQueryValidator : AbstractValidator<ArtistsQuery>
 {
-    public ListArtistsQueryValidator()
+    public ArtistsQueryValidator()
     {
         RuleFor(q => q.PageSize)
             .GreaterThan(0)

@@ -3,9 +3,9 @@ using MusicLibrary.Data.Entities;
 
 namespace MusicLibrary.Business.Collections;
 
-public class ListCollectionQueryValidator : AbstractValidator<ListCollectionQuery>
+public class CollectionQueryValidator : AbstractValidator<CollectionQuery>
 {
-    public ListCollectionQueryValidator()
+    public CollectionQueryValidator()
     {
         RuleFor(q => q.PageSize)
             .GreaterThan(0)

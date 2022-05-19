@@ -2,9 +2,9 @@
 
 namespace MusicLibrary.Business.Collections;
 
-public class ListCollectionDetailsQueryValidator : AbstractValidator<ListCollectionDetailsQuery>
+public class CollectionDetailsQueryValidator : AbstractValidator<CollectionDetailsQuery>
 {
-    public ListCollectionDetailsQueryValidator()
+    public CollectionDetailsQueryValidator()
     {
         RuleFor(x => x.CollectionId)
             .GreaterThan(0)

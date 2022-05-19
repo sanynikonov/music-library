@@ -4,4 +4,4 @@ using MusicLibrary.Business.Models;
 
 namespace MusicLibrary.Business.Collections;
 
-public record ListCollectionDetailsQuery(int CollectionId) : IRequest<Response<CollectionDetails>>;
+public record CollectionDetailsQuery(int CollectionId) : IRequest<Response<CollectionDetails>>;
