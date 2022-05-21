@@ -22,7 +22,7 @@ public class CollectionQueryHandler : IRequestHandler<CollectionQuery, PagedQuer
 
     public async Task<PagedQueryResponse<CollectionItem>> Handle(CollectionQuery request, CancellationToken cancellationToken)
     {
-        Expression<Func<Collection, bool>> predicate = Enum.TryParse<ReleaseType>(request.ReleaseType, out var releaseType)
+        Expression<Func<Collection, bool>> predicate = Enum.TryParse<ReleaseType>(request.ReleaseType, ignoreCase: true, out var releaseType)
             ? c => c.Type == releaseType && c.Title.Contains(request.SearchString)
             : c => c.Title.Contains(request.SearchString);
         

@@ -1,11 +1,9 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MusicLibrary.Business.Core.Responses;
 using MusicLibrary.Business.Models;
 using MusicLibrary.Data;
-using MusicLibrary.Data.UnitOfWork;
 
 namespace MusicLibrary.Business.Artists;
 
