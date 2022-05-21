@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: "app-search",
+  templateUrl: "./search.component.html",
+  styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  searchTerm: String = "";
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      if (params["searchTerm"])
+        this.searchTerm = params["searchTerm"];
+    });
   }
 
+  search(): void {
+    if (this.searchTerm) //TODO: maybe need to react and return everything
+      this.router.navigateByUrl(`/search/${this.searchTerm}`);
+  }
 }

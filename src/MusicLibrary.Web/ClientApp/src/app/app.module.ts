@@ -10,6 +10,7 @@ import { HomeComponent } from "./home/home.component";
 import { CounterComponent } from "./counter/counter.component";
 import { FetchDataComponent } from "./fetch-data/fetch-data.component";
 import { SearchComponent } from './search/search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchComponent } from './search/search.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    SearchComponent
+    SearchComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -28,7 +30,7 @@ import { SearchComponent } from './search/search.component';
       { path: "", component: HomeComponent, pathMatch: "full" },
       { path: "counter", component: CounterComponent },
       { path: "fetch-data", component: FetchDataComponent },
-      { path: "search", component: SearchComponent }
+      { path: "search/:searchTerm", component: SearchResultComponent }
     ])
   ],
   providers: [],
