@@ -12,13 +12,13 @@ export class CollectionService {
 
   constructor(private http: HttpClient, @Inject("BASE_URL") baseUrl: string){this.root = `${baseUrl}api/`}
 
-  getCollections(search: string, type: string, page: number, limit: number): Observable<PagedList<CollectionModel[]>> {
+  getCollections(search: string, type: string, page: number, limit: number): Observable<PagedList<CollectionModel>> {
     const params = new HttpParams()
       .set("SearchString", search)
       .set("ReleaseType", type)
       .set("PageNumber", page)
       .set("PageSize", limit);
 
-    return this.http.get<PagedList<CollectionModel[]>>(`${this.root}collections`, { params: params });
+    return this.http.get<PagedList<CollectionModel>>(`${this.root}collections`, { params: params });
   }
 }
