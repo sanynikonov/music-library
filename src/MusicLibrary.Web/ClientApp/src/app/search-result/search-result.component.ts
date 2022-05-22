@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import { CollectionService } from 'src/services/CollectionService';
 
 @Component({
   selector: 'app-search-result',
@@ -8,14 +9,19 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class SearchResultComponent implements OnInit {
 
-  result: String = "";
-  constructor(private route: ActivatedRoute) { }
+  result: any = "No result";
+  constructor(private route: ActivatedRoute, private service: CollectionService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if (params["searchTerm"])
-        this.result = params["searchTerm"];
-    })
+      if (params["searchTerm"]) {
+        const searchString = params["searchTerm"];
+        this.service.getCollections(searchString, "LongPlay", 1, 5)
+          .subscribe(
+            data => this.result = data,
+            error => console.log(error));
+      }
+    });
   }
 
 }
